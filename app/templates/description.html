@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generated Business Plan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f8;
+      padding: 40px;
+    }
+    .description-box {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .description-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #0d6efd;
+      font-weight: 600;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .btn-group {
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="description-box">
+      <div class="description-title">📄 Generated Business Plan</div>
+      <pre id="markdown-content">{{ description }}</pre>
+
+      <div class="btn-group">
+        <a href="/application-form" class="btn btn-secondary">⬅ Back to Form</a>
+        <button class="btn btn-success" onclick="downloadMarkdown()">⬇ Download as .md</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function downloadMarkdown() {
+      const content = document.getElementById("markdown-content").innerText;
+      const blob = new Blob([content], { type: "text/markdown" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "business_plan.md";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+</body>
+</html>

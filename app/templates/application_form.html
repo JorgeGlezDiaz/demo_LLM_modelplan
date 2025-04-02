@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Model Application Form</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      background-color: #f5f8fa;
+    }
+
+    .main-title {
+      background: linear-gradient(90deg, #0d6efd 0%, #4ba3f2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #2a5d84;
+    }
+
+    .form-section {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control {
+      border-radius: 5px;
+    }
+
+    .emoji {
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background-color: #ddd;
+      margin: 20px 0;
+    }
+
+    button.btn-primary {
+      padding: 10px 25px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-5">
+    <div class="main-title">📋 Business Model Application Form</div>
+
+    <div id="form-alert" class="alert alert-danger d-none" role="alert"></div>
+
+    <form
+      id="business-form"
+      method="POST"
+      action="/submit-form"
+      onsubmit="return validateForm(event)"
+      novalidate
+    >
+      <!-- Business Idea -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">💡</span> Business Idea</h4>
+        <div class="mb-3">
+          <label class="form-label">What is your product or service?</label>
+          <textarea class="form-control" name="product_service" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">What problem does it solve?</label>
+          <textarea class="form-control" name="problem_solved" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">What makes it different?</label>
+          <textarea class="form-control" name="unique_value" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Target Market -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">🎯</span> Target Market</h4>
+        <div class="mb-3">
+          <label class="form-label">Who is your ideal customer?</label>
+          <textarea class="form-control" name="target_customer" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">What geographic location do you operate in?</label>
+          <input type="text" class="form-control" name="location" required />
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Competition -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">🏆</span> Competition</h4>
+        <div class="mb-3">
+          <label class="form-label">Who are your main competitors?</label>
+          <textarea class="form-control" name="competitors" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">What differentiates you from them?</label>
+          <textarea class="form-control" name="competitive_advantage" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Revenue Model -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">💸</span> Revenue Model</h4>
+        <div class="mb-3">
+          <label class="form-label">How does your business make money?</label>
+          <textarea class="form-control" name="revenue_model" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">What is your pricing strategy?</label>
+          <textarea class="form-control" name="pricing_strategy" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Operations -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">🛠️</span> Operations</h4>
+        <div class="mb-3">
+          <label class="form-label">What do you need to operate? (Key resources)</label>
+          <textarea class="form-control" name="key_resources" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Who are your key partners or suppliers?</label>
+          <textarea class="form-control" name="key_partners" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Marketing & Sales -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">📣</span> Marketing & Sales</h4>
+        <div class="mb-3">
+          <label class="form-label">How do you plan to reach your customers?</label>
+          <textarea class="form-control" name="marketing_strategy" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Which sales channels will you use?</label>
+          <textarea class="form-control" name="sales_channels" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Financial Projections -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">📊</span> Financial Projections</h4>
+        <div class="mb-3">
+          <label class="form-label">What are your estimated initial costs?</label>
+          <input type="text" class="form-control" name="initial_costs" required />
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">What is your expected revenue in the first year?</label>
+          <input type="text" class="form-control" name="expected_revenue" required />
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Goals -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">🎯</span> Goals</h4>
+        <div class="mb-3">
+          <label class="form-label">What do you aim to achieve in the next 6 and 12 months?</label>
+          <textarea class="form-control" name="goals" rows="3" required></textarea>
+          <div class="invalid-feedback">This field is required.</div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function validateForm(event) {
+      const form = document.getElementById("business-form");
+      const alertBox = document.getElementById("form-alert");
+
+      alertBox.classList.add("d-none");
+      alertBox.innerText = "";
+
+      const requiredFields = form.querySelectorAll("[required]");
+      let valid = true;
+
+      requiredFields.forEach((field) => {
+        const value = field.value.trim();
+        if (!value) {
+          field.classList.add("is-invalid");
+          valid = false;
+        } else {
+          field.classList.remove("is-invalid");
+        }
+      });
+
+      if (!valid) {
+        event.preventDefault();
+        alertBox.innerText = "⚠️ Please complete all required fields before submitting the form.";
+        alertBox.classList.remove("d-none");
+
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }, 100);
+
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+  
+<script>
+  // Scroll al top al cargar
+  window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+  });
+</script>
+
+
+</body>
+</html>
