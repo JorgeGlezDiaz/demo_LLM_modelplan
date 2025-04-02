@@ -18,14 +18,15 @@ class State(TypedDict):
     financial_plan: str
     final_markdown: str
 
-def build_prompt_from_form(data: dict) -> str:                          # Take form data and built a legible promt 
+def build_prompt_from_form(data: dict) -> str:                            # Take form data and built a legible promt 
     sections = []
     for key, value in data.items():
         pretty_key = key.replace("_", " ").capitalize()
-        sections.append(f"### {pretty_key}\n{value.strip()}")
+        sections.append(f"### {pretty_key}\n{value.strip()}")             # ### as markdown section
     return "\n\n".join(sections)                                          # join each section with spaces between them
 
  
+
 def company_describer_node(state: State) -> State:
     prompt = state["messages"][-1].content
     description = generate_company_description(prompt)
@@ -33,22 +34,26 @@ def company_describer_node(state: State) -> State:
 
 
 def merge_to_markdown_node(state: State) -> State:
-    markdown = f"""# Business Plan
+    
+    sections = ["market_analysis", 
+                "marketing_plan", 
+                "financial_plan"
+                ]
 
-## Market Analysis
-{state.get("market_analysis", "")}
+    toc = "## Table of Contents\n"
+    body = ""
 
----
+    for section in sections:
+        title = section.replace("_", " ").title()
+        anchor = title.lower().replace(" ", "-")
+        content = state.get(section, "*No content available.*")
 
-## Marketing Plan
-{state.get("marketing_plan", "")}
+        toc += f"- [{title}](#{anchor})\n"
+        body += f"\n## {title}\n{content}\n\n---\n"
 
----
-
-## Financial Plan
-{state.get("financial_plan", "")}
-"""
+    markdown = f"# Business Plan\n\n{toc}\n{body}"
     return {"final_markdown": markdown}
+
 
 graph_builder = StateGraph(State)
 
