@@ -25,7 +25,7 @@ def build_prompt_from_form(data: dict) -> str:                          # Take f
         sections.append(f"### {pretty_key}\n{value.strip()}")
     return "\n\n".join(sections)                                          # join each section with spaces between them
 
-
+ 
 def company_describer_node(state: State) -> State:
     prompt = state["messages"][-1].content
     description = generate_company_description(prompt)
