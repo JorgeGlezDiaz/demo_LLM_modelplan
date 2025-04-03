@@ -53,4 +53,4 @@ We project $120,000 in revenue in year one based on a conservative estimate of 3
 🎯 Goals
 What do you aim to achieve in the next 6 and 12 months?
 In 6 months: Launch MVP, acquire 100 paying users, and secure a $150k seed round.
-In 12 months: Reach 500 users, expand feature set, and start preparing for Series A funding.
+In 12 months: Reach 500 users, expand feature set, and start preparing for Series A funding.  hhhhh
