@@ -1,6 +1,6 @@
 💡 Business Idea
 What is your product or service?
-We are ATRINEO and we provide a subscription-based AI assistant platform for small businesses, helping with administrative tasks, customer support, and data analysis.
+The name of the company is ATRINEO and we provide a subscription-based AI assistant platform for small businesses, helping with administrative tasks, customer support, and data analysis.
 
 What problem does it solve?
 Small businesses often lack the resources to hire full-time staff for repetitive or time-consuming tasks. Our platform automates these processes using AI, saving time and costs.
@@ -53,4 +53,4 @@ We project $120,000 in revenue in year one based on a conservative estimate of 3
 🎯 Goals
 What do you aim to achieve in the next 6 and 12 months?
 In 6 months: Launch MVP, acquire 100 paying users, and secure a $150k seed round.
-In 12 months: Reach 500 users, expand feature set, and start preparing for Series A funding.  hhhhh
+In 12 months: Reach 500 users, expand feature set, and start preparing for Series A funding.  

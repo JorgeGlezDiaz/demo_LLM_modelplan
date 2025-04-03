@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
-from graph.business_graph import run_business_plan_pipeline
+from app.graph.langgraph_business_model import graph
+from app.graph.langgraph_business_model import run_business_plan_pipeline
+
 
 
 router = APIRouter()
@@ -51,7 +53,7 @@ async def submit_form(
 
     markdown_result = run_business_plan_pipeline(data)
 
-    return templates.TemplateResponse("description.html", {
+    return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "description": markdown_result  
+        "description": markdown_result["final_markdown"] 
     })
