@@ -1,8 +1,5 @@
 from langgraph.graph import StateGraph
-from langgraph.graph.message import add_messages
-from langchain_core.messages import HumanMessage
 from typing_extensions import TypedDict
-from typing import Annotated
 from agents.langgraph_agent import generate_company_description
 from agents.business_plan_agent import (
     executive_summary_node,
@@ -23,7 +20,8 @@ from agents.business_plan_agent import (
 
 
 class State(TypedDict):
-    messages: Annotated[list, add_messages]
+    #messages: Annotated[list, add_messages]
+    raw_data: str
     description: str
     executive_summary: str
     project_team: str
@@ -42,7 +40,7 @@ class State(TypedDict):
     final_markdown: str
 
 
-def build_prompt_from_form(data: dict) -> str:                            # Take form data and built a legible promt 
+def convert_input_into_markdown(data: dict) -> str:                            # Take form data and built a legible promt 
     sections = []
     for key, value in data.items():
         pretty_key = key.replace("_", " ").capitalize()
@@ -51,9 +49,10 @@ def build_prompt_from_form(data: dict) -> str:                            # Take
 
  
 
-def company_describer_node(state: State) -> State:
-    prompt = state["messages"][-1].content
-    description = generate_company_description(prompt)
+def company_describer_node(state: State) -> State:                  ### make two nodes ####
+    markdown = convert_input_into_markdown(state["raw_data"])
+    description = generate_company_description(markdown)
+
     return {"description": description}
 
 
@@ -138,27 +137,5 @@ graph_builder.set_finish_point("merge_to_markdown")
 graph = graph_builder.compile()
 
 def run_business_plan_pipeline(data: dict) -> str:
-    initial_prompt = build_prompt_from_form(data)
-
-    initial_state = {
-        "messages": [HumanMessage(content=initial_prompt)],
-        "description": "",
-        "executive_summary": "",
-        "project_team": "",
-        "product_description": "",
-        "market_analysis": "",
-        "marketing_plan": "",
-        "production_plan": "",
-        "organization_personnel": "",
-        "investment_plan": "",
-        "income_cashflow_forecast": "",
-        "financial_plan": "",
-        "legal_aspects": "",
-        "risk_assessment": "",
-        "contingency_coverage": "",
-        "csr": "",
-        "final_markdown": ""
-    }
-
-    final_state = graph.invoke(initial_state)
+    final_state = graph.invoke({"raw_data":data})
     return final_state["final_markdown"]
