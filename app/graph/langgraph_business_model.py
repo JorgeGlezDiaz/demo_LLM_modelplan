@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
 
 
-llm = ChatOllama(model="llama3:latest")
+llm = ChatOllama(model="llama3.2:latest")
 
 class State(TypedDict):
 
@@ -40,9 +40,12 @@ def ask_llm(prompt: str) -> str:
 
 def convert_input_into_markdown(data: dict) -> str:                            # Take form data and built a legible promt 
     sections = []
+
     for key, value in data.items():
+
         pretty_key = key.replace("_", " ").capitalize()
         sections.append(f"### {pretty_key}\n{value.strip()}")             # ### as markdown section
+
     return "\n\n".join(sections)                                          # join each section with spaces between them
 
 
@@ -50,7 +53,8 @@ def convert_input_into_markdown(data: dict) -> str:                            #
 
 
 def convert_form_node(state: dict) -> State:
-    result = convert_input_into_markdown(state)  
+
+    result = convert_input_into_markdown(state["raw_data"])  
     return {"raw_data": result}
 
 
@@ -442,4 +446,4 @@ graph_builder.set_finish_point("merge_to_markdown")
 graph = graph_builder.compile()
 
 def run_business_plan_pipeline(data: dict) -> dict:
-    return graph.invoke(data)
+    return graph.invoke({"raw_data": data})
