@@ -21,7 +21,6 @@ async def submit_form(
     key_activities: str = Form(...),
     key_partnerships: str = Form(...),
     cost_structure: str = Form(...),
-    profit: str = Form(...)
 ):
     data = {
         "customer_segments": customer_segments,
@@ -33,12 +32,12 @@ async def submit_form(
         "key_activities": key_activities,
         "key_partnerships": key_partnerships,
         "cost_structure": cost_structure,
-        "profit": profit
     }
 
     markdown_result = run_business_plan_pipeline(data)
 
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "description": markdown_result["final_markdown"]
+        "description": markdown_result["final_markdown"],
+        "company_description": markdown_result["company_description"]
     })
