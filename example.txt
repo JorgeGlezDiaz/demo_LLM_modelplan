@@ -54,3 +54,62 @@ We project $120,000 in revenue in year one based on a conservative estimate of 3
 What do you aim to achieve in the next 6 and 12 months?
 In 6 months: Launch MVP, acquire 100 paying users, and secure a $150k seed round.
 In 12 months: Reach 500 users, expand feature set, and start preparing for Series A funding.  
+
+
+
+
+👥 Customer Segments
+Small business owners in the retail, service, and hospitality industries (1–20 employees) across North America and Europe. They often lack time and staff for repetitive tasks and customer support.
+
+🎯 Value Propositions
+ATRINEO offers an AI-powered assistant tailored to SMEs. It automates administrative tasks, manages customer inquiries, and provides data insights. Unlike generic tools, it offers industry-specific templates and integrations.
+
+📢 Channels
+Customers are reached via our website, SEO-optimized content, LinkedIn Ads, and partnerships with business associations. The platform is delivered through a cloud-based web application.
+
+💬 Customer Relationships
+We provide a mix of self-service tools and personalized onboarding. Customer support includes live chat, tutorial libraries, and dedicated account managers for premium tiers.
+
+💸 Revenue Streams
+We operate on a subscription-based model:
+
+Starter: $29/month
+
+Pro: $59/month
+
+Enterprise: $99/month
+Includes tiered features and usage limits. We also offer custom enterprise solutions.
+
+🧰 Key Resources
+Cloud infrastructure (AWS), AI/NLP models (OpenAI), in-house development team, customer success team, and integration tools for external platforms like QuickBooks and Slack.
+
+⚙️ Key Activities
+Product development, user onboarding, customer support, marketing campaigns, partnership management, and continuous improvement of AI models.
+
+🤝 Key Partnerships
+
+AWS (infrastructure)
+
+OpenAI (language models)
+
+Stripe (payment processing)
+
+AppSumo (distribution)
+
+Local business networks and accelerators
+
+🏗️ Cost Structure
+
+Development and maintenance costs
+
+Cloud infrastructure (AWS)
+
+Marketing and advertising
+
+Staff salaries
+
+Licensing fees for AI tools
+
+📈 Profit Estimation
+Break-even point expected after reaching 400 users. With current pricing, we project $120,000 in first-year revenue. Profits scale with automation and minimal customer acquisition cost in later stages.
+

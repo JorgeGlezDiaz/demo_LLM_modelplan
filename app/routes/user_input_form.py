@@ -1,9 +1,6 @@
 from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
-from app.graph.langgraph_business_model import graph
 from app.graph.langgraph_business_model import run_business_plan_pipeline
-
-
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -15,45 +12,33 @@ def get_application_form(request: Request):
 @router.post("/submit-form")
 async def submit_form(
     request: Request,
-    product_service: str = Form(...),
-    problem_solved: str = Form(...),
-    unique_value: str = Form(...),
-    target_customer: str = Form(...),
-    location: str = Form(...),
-    competitors: str = Form(...),
-    competitive_advantage: str = Form(...),
-    revenue_model: str = Form(...),
-    pricing_strategy: str = Form(...),
+    customer_segments: str = Form(...),
+    value_propositions: str = Form(...),
+    channels: str = Form(...),
+    customer_relationships: str = Form(...),
+    revenue_streams: str = Form(...),
     key_resources: str = Form(...),
-    key_partners: str = Form(...),
-    marketing_strategy: str = Form(...),
-    sales_channels: str = Form(...),
-    initial_costs: str = Form(...),
-    expected_revenue: str = Form(...),
-    goals: str = Form(...)
+    key_activities: str = Form(...),
+    key_partnerships: str = Form(...),
+    cost_structure: str = Form(...),
+    profit: str = Form(...)
 ):
     data = {
-        "product_service": product_service,
-        "problem_solved": problem_solved,
-        "unique_value": unique_value,
-        "target_customer": target_customer,
-        "location": location,
-        "competitors": competitors,
-        "competitive_advantage": competitive_advantage,
-        "revenue_model": revenue_model,
-        "pricing_strategy": pricing_strategy,
+        "customer_segments": customer_segments,
+        "value_propositions": value_propositions,
+        "channels": channels,
+        "customer_relationships": customer_relationships,
+        "revenue_streams": revenue_streams,
         "key_resources": key_resources,
-        "key_partners": key_partners,
-        "marketing_strategy": marketing_strategy,
-        "sales_channels": sales_channels,
-        "initial_costs": initial_costs,
-        "expected_revenue": expected_revenue,
-        "goals": goals
+        "key_activities": key_activities,
+        "key_partnerships": key_partnerships,
+        "cost_structure": cost_structure,
+        "profit": profit
     }
 
     markdown_result = run_business_plan_pipeline(data)
 
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "description": markdown_result["final_markdown"] 
+        "description": markdown_result["final_markdown"]
     })
