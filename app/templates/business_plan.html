@@ -31,15 +31,22 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="description-box">
-      <div class="description-title">📄 Generated Business Plan</div>
+  <div class="description-box">
+    <!-- Nueva sección: descripción de empresa -->
+    <div class="mb-4">
+      <h5 class="description-title">🏢 Company Description</h5>
+      <pre>{{ company_description }}</pre>
+    </div>
+  
+    <!-- Plan de negocio completo -->
+    <div class="mb-4">
+      <h5 class="description-title">📄 Generated Business Plan</h5>
       <pre id="markdown-content">{{ description }}</pre>
-
-      <div class="btn-group">
-        <a href="/application-form" class="btn btn-secondary">⬅ Back to Form</a>
-        <button class="btn btn-success" onclick="downloadMarkdown()">⬇ Download as .md</button>
-      </div>
+    </div>
+  
+    <div class="btn-group">
+      <a href="/application-form" class="btn btn-secondary">⬅ Back to Form</a>
+      <button class="btn btn-success" onclick="downloadMarkdown()">⬇ Download as .md</button>
     </div>
   </div>
 

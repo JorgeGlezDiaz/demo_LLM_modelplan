@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Business Model Application Form</title>
+  <title>Business Model Canvas Form</title>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-
   <style>
     body {
       background-color: #f5f8fa;
@@ -67,149 +66,73 @@
 
 <body>
   <div class="container py-5">
-    <div class="main-title">📋 Business Model Application Form</div>
+    <div class="main-title">📋 Business Model Canvas Form</div>
 
     <div id="form-alert" class="alert alert-danger d-none" role="alert"></div>
 
-    <form
-      id="business-form"
-      method="POST"
-      action="/submit-form"
-      onsubmit="return validateForm(event)"
-      novalidate
-    >
-      <!-- Business Idea -->
+    <form id="business-form" method="POST" action="/submit-form" onsubmit="return validateForm(event)" novalidate>
+      
+      <!-- Customer Segments -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">💡</span> Business Idea</h4>
-        <div class="mb-3">
-          <label class="form-label">What is your product or service?</label>
-          <textarea class="form-control" name="product_service" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">What problem does it solve?</label>
-          <textarea class="form-control" name="problem_solved" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">What makes it different?</label>
-          <textarea class="form-control" name="unique_value" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">👥</span> Customer Segments</h4>
+        <label class="form-label">Who are your customer segments?</label>
+        <textarea class="form-control" name="customer_segments" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Target Market -->
+      <!-- Value Propositions -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">🎯</span> Target Market</h4>
-        <div class="mb-3">
-          <label class="form-label">Who is your ideal customer?</label>
-          <textarea class="form-control" name="target_customer" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">What geographic location do you operate in?</label>
-          <input type="text" class="form-control" name="location" required />
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">🎯</span> Value Propositions</h4>
+        <label class="form-label">What value do you deliver to your customers?</label>
+        <textarea class="form-control" name="value_propositions" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Competition -->
+      <!-- Channels -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">🏆</span> Competition</h4>
-        <div class="mb-3">
-          <label class="form-label">Who are your main competitors?</label>
-          <textarea class="form-control" name="competitors" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">What differentiates you from them?</label>
-          <textarea class="form-control" name="competitive_advantage" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">📢</span> Channels</h4>
+        <label class="form-label">How do you deliver your value proposition to customers?</label>
+        <textarea class="form-control" name="channels" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Revenue Model -->
+      <!-- Customer Relationships -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">💸</span> Revenue Model</h4>
-        <div class="mb-3">
-          <label class="form-label">How does your business make money?</label>
-          <textarea class="form-control" name="revenue_model" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">What is your pricing strategy?</label>
-          <textarea class="form-control" name="pricing_strategy" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">💬</span> Customer Relationships</h4>
+        <label class="form-label">What kind of relationship will you maintain with your customers?</label>
+        <textarea class="form-control" name="customer_relationships" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Operations -->
+      <!-- Revenue Streams -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">🛠️</span> Operations</h4>
-        <div class="mb-3">
-          <label class="form-label">What do you need to operate? (Key resources)</label>
-          <textarea class="form-control" name="key_resources" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Who are your key partners or suppliers?</label>
-          <textarea class="form-control" name="key_partners" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">💸</span> Revenue Streams</h4>
+        <label class="form-label">How will your business generate income?</label>
+        <textarea class="form-control" name="revenue_streams" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Marketing & Sales -->
+      <!-- Key Resources -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">📣</span> Marketing & Sales</h4>
-        <div class="mb-3">
-          <label class="form-label">How do you plan to reach your customers?</label>
-          <textarea class="form-control" name="marketing_strategy" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Which sales channels will you use?</label>
-          <textarea class="form-control" name="sales_channels" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">🧰</span> Key Resources</h4>
+        <label class="form-label">What resources are essential for delivering your value proposition?</label>
+        <textarea class="form-control" name="key_resources" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Financial Projections -->
+      <!-- Key Activities -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">📊</span> Financial Projections</h4>
-        <div class="mb-3">
-          <label class="form-label">What are your estimated initial costs?</label>
-          <input type="text" class="form-control" name="initial_costs" required />
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">What is your expected revenue in the first year?</label>
-          <input type="text" class="form-control" name="expected_revenue" required />
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">⚙️</span> Key Activities</h4>
+        <label class="form-label">What activities do you need to perform well?</label>
+        <textarea class="form-control" name="key_activities" required></textarea>
       </div>
 
-      <div class="section-divider"></div>
-
-      <!-- Goals -->
+      <!-- Key Partnerships -->
       <div class="form-section">
-        <h4 class="section-title"><span class="emoji">🎯</span> Goals</h4>
-        <div class="mb-3">
-          <label class="form-label">What do you aim to achieve in the next 6 and 12 months?</label>
-          <textarea class="form-control" name="goals" rows="3" required></textarea>
-          <div class="invalid-feedback">This field is required.</div>
-        </div>
+        <h4 class="section-title"><span class="emoji">🤝</span> Key Partnerships</h4>
+        <label class="form-label">Who are your key partners and suppliers?</label>
+        <textarea class="form-control" name="key_partnerships" required></textarea>
+      </div>
+
+      <!-- Cost Structure -->
+      <div class="form-section">
+        <h4 class="section-title"><span class="emoji">🏗️</span> Cost Structure</h4>
+        <label class="form-label">What are the main costs your business will incur?</label>
+        <textarea class="form-control" name="cost_structure" required></textarea>
       </div>
 
       <!-- Submit Button -->
@@ -218,8 +141,6 @@
       </div>
     </form>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     function validateForm(event) {
@@ -259,15 +180,11 @@
 
       return true;
     }
+
+    // Scroll to top on load
+    window.addEventListener("load", () => {
+      window.scrollTo(0, 0);
+    });
   </script>
-  
-<script>
-  // Scroll at the top
-  window.addEventListener("load", () => {
-    window.scrollTo(0, 0);
-  });
-</script>
-
-
 </body>
 </html>
