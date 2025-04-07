@@ -1,38 +1,69 @@
-👥 Customer Segments  
-Small business owners in the retail, service, and hospitality industries (1–20 employees) across North America and Europe. They often lack time and staff for repetitive tasks and customer support.
+👥 Customer Segments
+ATRINEO primarily works with prestigious scientific institutions such as universities, 
+research centers, and innovation-driven companies. These clients require expert support 
+in structuring and managing the transfer of knowledge and technology. They often need 
+guidance in defining strategies, establishing processes, and implementing systems for 
+innovation and commercialization. The typical clients are public and private research 
+institutions, R&D-intensive companies, technology transfer offices, and innovation-driven 
+SMEs. Their main expectations revolve around receiving strategic consulting, operational 
+support in innovation system deployment, and tools to manage intellectual property and 
+transfer processes effectively.
 
-🎯 Value Propositions  
-ATRINEO offers an AI-powered assistant tailored to SMEs. It automates administrative tasks, manages customer inquiries, and provides data insights. Unlike generic tools, it offers industry-specific templates and integrations.
+🎯 Value Propositions
+ATRINEO offers specialized consulting and system solutions that address the full cycle of 
+knowledge and technology transfer—from identification and evaluation to development and 
+commercialization. It delivers value by providing expert feasibility studies, tailored 
+innovation strategies, and the implementation of customizable IT systems for managing 
+intellectual property and collaborations. The company also supports its clients through 
+capacity-building programs designed to strengthen institutional innovation capabilities. 
+ATRINEO helps organizations bridge the gap between research and market, creating measurable 
+impact through innovation.
 
-📢 Channels  
-Customers are reached via our website, SEO-optimized content, LinkedIn Ads, and partnerships with business associations. The platform is delivered through a cloud-based web application.
+📢 Channels
+ATRINEO reaches its clients through direct consulting engagements and long-term strategic 
+partnerships. It also engages audiences through its participation in academic and industry 
+conferences and through content shared on its website, including whitepapers, reports, and 
+success stories. Collaborations with alliances and associations focused on knowledge transfer 
+further expand its visibility. These channels allow ATRINEO to maintain a strong presence 
+within a specialized market and build meaningful, lasting client relationships.
 
-💬 Customer Relationships  
-We provide a mix of self-service tools and personalized onboarding. Customer support includes live chat, tutorial libraries, and dedicated account managers for premium tiers.
+💬 Customer Relationships
+ATRINEO builds highly personalized relationships by offering tailored consulting based on each 
+client's institutional context. It provides ongoing support throughout technology transfer and 
+innovation projects, along with targeted training programs. The company’s partnership-oriented 
+model is grounded in trust, collaboration, and clearly measurable outcomes, fostering strong 
+long-term engagements with its clients.
 
-💸 Revenue Streams  
-We operate on a subscription-based model:  
-- Starter: $29/month  
-- Pro: $59/month  
-- Enterprise: $99/month  
-Includes tiered features and usage limits. We also offer custom enterprise solutions.
+💸 Revenue Streams
+The company’s revenue model is service-oriented and based on consulting fees from innovation 
+and tech transfer projects. Additional income comes from implementing and licensing customized 
+information management systems. ATRINEO also generates revenue through its educational offerings, 
+such as professional development workshops and training programs. This combination of consulting, 
+systems, and training ensures a diversified and sustainable business model built on long-term value
+ delivery.
 
-🧰 Key Resources  
-Cloud infrastructure (AWS), AI/NLP models (OpenAI), in-house development team, customer success team, and integration tools for external platforms like QuickBooks and Slack.
+🧰 Key Resources
+ATRINEO's key resources include a highly skilled consulting team with deep expertise in technology 
+transfer, market research, and innovation strategy. It also leverages proprietary methodologies and 
+tools developed in-house to optimize client processes. A strong reputation and extensive professional 
+network across Europe are central to its ability to secure impactful projects and partnerships.
 
-⚙️ Key Activities  
-Product development, user onboarding, customer support, marketing campaigns, partnership management, and continuous improvement of AI models.
+⚙️ Key Activities
+The company's core activities include developing and implementing innovation strategies, conducting 
+market and feasibility studies, and supporting collaborative projects between industry and research. 
+It also builds and maintains customized information systems to manage innovation workflows and delivers 
+specialized training in intellectual property, innovation, and commercialization. These activities are 
+performed with a structured, impact-driven approach.
 
-🤝 Key Partnerships  
-- AWS (infrastructure)  
-- OpenAI (language models)  
-- Stripe (payment processing)  
-- AppSumo (distribution)  
-- Local business networks and accelerators
+🤝 Key Partnerships
+ATRINEO collaborates closely with universities, research institutions, and innovation agencies. 
+It also works with funding bodies, startups, and SMEs engaged in commercializing research. Cross-border 
+collaboration is enabled through partnerships with international networks focused on knowledge transfer 
+and innovation. These alliances extend ATRINEO’s impact and support the realization of complex, multi-stakeholder 
+innovation projects.
 
-🏗️ Cost Structure  
-- Development and maintenance costs  
-- Cloud infrastructure (AWS)  
-- Marketing and advertising  
-- Staff salaries  
-- Licensing fees for AI tools
+🏗️ Cost Structure
+The company's main costs stem from its expert consulting staff and the development and maintenance of its 
+proprietary platforms and tools. Additional costs are associated with creating training materials, conducting 
+research, and participating in industry events. ATRINEO maintains efficiency by applying lean project management,
+optimizing internal resource allocation, and focusing on high-value consulting engagements that ensure measurable returns.

@@ -3,11 +3,10 @@ from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
 
-
 llm = ChatOllama(model="llama3.2:latest")
 
-class State(TypedDict):
 
+class State(TypedDict):
     raw_data: str
     company_description: str
 
@@ -29,330 +28,300 @@ class State(TypedDict):
     final_markdown: str
 
 
-### Functions ###
-
-
 def ask_llm(prompt: str) -> str:
-    response = llm.invoke([HumanMessage(content=prompt)])   # response of the llm
-    return response.content.strip()                         # clean with no spaces
+    response = llm.invoke([HumanMessage(content=prompt)])
+    return response.content.strip()
 
 
-
-def convert_input_into_markdown(data: dict) -> str:                            # Take form data and built a legible promt 
-    sections = []
-
-    for key, value in data.items():
-
-        pretty_key = key.replace("_", " ").capitalize()
-        sections.append(f"### {pretty_key}\n{value.strip()}")             # ### as markdown section
-
-    return "\n\n".join(sections)                                          # join each section with spaces between them
+def convert_input_into_markdown(data: dict) -> str:
+    sections = [f"### {k.replace('_', ' ').capitalize()}\n{v.strip()}" for k, v in data.items()]
+    return "\n\n".join(sections)
 
 
 ### NODES ###
 
-
 def convert_form_node(state: dict) -> State:
-
-    result = convert_input_into_markdown(state["raw_data"])  
+    result = convert_input_into_markdown(state["raw_data"])
     return {"raw_data": result}
 
 
 def company_description_node(state: State) -> State:
     prompt = f"""
+You are a business consultant with expertise in startup analysis and pitch preparation.
 
-You are a business consultant with expertise in startups and venture analysis.
+Carefully read the company's foundational information below and generate a well-structured, detailed, and persuasive **company description** in **Markdown format**. Write between **400-600 words**.
 
-Your task is to carefully read the following company information provided by a founder and generate a 
-**professional and detailed company description** of at least **400-600 words**, in **Markdown** format.
+### Guidelines:
+- Use a professional, yet engaging tone (like addressing investors).
+- Include:
+  - What the company does
+  - The product/service
+  - The market opportunity
+  - Target customers
+  - Business model and key advantages
+  - Competitive positioning
+- Structure with clear headings and subheadings.
+- Avoid repetition or generalities.
 
----
-
-📄 **Guidelines:**
-
-- Use a formal and informative tone.
-- Avoid repetition and generic phrases.
-- Include relevant details about the product/service, the market opportunity, target audience, business model, and competitive advantage.
-- Organize your answer with headers and subheaders using Markdown.
-- The text should be engaging and suitable for an investor or stakeholder presentation.
-
----
-
-📬 **Company Input**:
+### Founder Input:
 {state['raw_data']}
 
 ---
 
-✍️ Now generate the full company description below:
+Write the full company description below:
 """
-    result = ask_llm(prompt)
-    return {"company_description": result}
+    return {"company_description": ask_llm(prompt)}
 
-########## PARALEL NODES ###########
 
+### BUSINESS PLAN SECTION NODES ###
 
 def executive_summary_node(state: State) -> State:
-
     prompt = f"""
-You are a business strategist.
+You are a business strategist and investor pitch expert.
 
-Based on the company description below, write an insightful and persuasive **Executive Summary**.
-Use Markdown formatting and include the mission, vision, core offering, and unique value proposition.
-Make sure it feels like an elevator pitch to investors.
+Using the company description below, write an **Executive Summary** in Markdown. It should be persuasive and concise (max 350 words), highlighting:
+
+- A strong opening hook
+- The key problem addressed
+- The product/service and its core innovation
+- Market opportunity
+- Unique Value Proposition
+- Vision and mission
+- Call to action for potential investors
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"executive_summary": result}
-
+    return {"executive_summary": ask_llm(prompt)}
 
 
 def project_team_node(state: State) -> State:
-
     prompt = f"""
-You are an HR and startup consultant.
+You are an HR and startup advisor.
 
-Using the company description below, describe the **Project Promotion Team**.
-Include roles, responsibilities, relevant experience, and key strengths of the founding members.
-Use Markdown format, and if team details are missing, infer plausible structure.
+Based on the company description, describe the **Project Promotion Team** in Markdown format. Include:
+
+- Key roles and responsibilities
+- Required expertise
+- Suggested team structure
+- Justification for these roles in early-stage operations
+
+If the original input lacks specifics, infer plausible but realistic startup team members.
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"project_team": result}
-
+    return {"project_team": ask_llm(prompt)}
 
 
 def product_description_node(state: State) -> State:
-
     prompt = f"""
-You are a product development expert.
+You are a product strategy consultant.
 
-Based on the company description below, write a clear and compelling **Description of the Product or Service**.
-Use Markdown format and include features, benefits, use cases, and technological aspects if relevant.
+Write a detailed **Product or Service Description** in Markdown. Include:
+
+- What it is and how it works
+- Features and benefits
+- Use cases and scenarios
+- Technical and operational aspects
+- Value delivered to end-users
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"product_description": result}
-
+    return {"product_description": ask_llm(prompt)}
 
 
 def market_analysis_node(state: State) -> State:
-
     prompt = f"""
-You are a professional market research analyst.
+You are a senior market analyst.
 
-Using the company description below, write a detailed and well-structured **Market Analysis** section for a business plan. 
-Use a formal, professional tone and Markdown formatting.
+Based on the company description, generate a **Market Analysis** section in Markdown that includes:
 
-Your response should include:
-- **Target Customer Profile**: demographics, behaviors, needs
-- **Industry Trends**: current and emerging trends
-- **Competitive Landscape**: key competitors and their strengths/weaknesses
-- **Market Size & Growth Potential**: estimated figures, sources if possible
+- Target customer profile (demographics, behavior, needs)
+- Market size and TAM/SAM/SOM if inferable
+- Key trends and market dynamics
+- Competitor landscape (3–5 key players)
+- Competitive advantage and differentiation
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"market_analysis": result}
-
+    return {"market_analysis": ask_llm(prompt)}
 
 
 def marketing_plan_node(state: State) -> State:
-
     prompt = f"""
-You are an experienced marketing strategist.
+You are a marketing and growth strategist.
 
-Using the company description below, write a comprehensive and professional **Marketing Plan** section for a business plan. 
-Use Markdown format for clarity and structure.
+Using the company description, write a **Marketing Plan** in Markdown. Include:
 
-Your response should include:
-- **Overall Marketing Strategy**: positioning and key messaging
-- **Customer Acquisition Channels**: online/offline, social media, SEO, etc.
-- **Branding Approach**: visual identity, tone of voice
-- **Sales Funnel & Conversion**: how leads are captured and converted
-- **Marketing Budget Overview**: rough distribution if possible
+- Positioning and branding strategy
+- Customer acquisition channels
+- Marketing tactics: SEO, social media, influencers, etc.
+- Lead nurturing and conversion funnel
+- Budget allocation if applicable
+- KPIs and metrics to track
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"marketing_plan": result}
-
+    return {"marketing_plan": ask_llm(prompt)}
 
 
 def production_plan_node(state: State) -> State:
-
     prompt = f"""
 You are a production and operations expert.
 
-Based on the company description below, write a realistic **Production Plan**.
-Use Markdown format and describe production steps, timelines, technology, equipment, and logistics involved.
+Create a **Production Plan** in Markdown based on the company description. Cover:
+
+- Product/service development phases
+- Key operational steps
+- Required tools, platforms, technologies
+- Timeline estimates (e.g. MVP, beta, full launch)
+- Logistics and scalability considerations
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"production_plan": result}
+    return {"production_plan": ask_llm(prompt)}
 
 
 def organization_personnel_node(state: State) -> State:
-
     prompt = f"""
-You are an HR and management expert.
+You are an organizational designer for startups.
 
-Using the company description below, write a professional **Organization and Personnel** section.
-Include company structure, number of employees, roles, and hiring plans. Format in Markdown.
+Write the **Organization and Personnel** section in Markdown. Include:
+
+- Organizational structure
+- Core departments and their functions
+- Key roles and hiring priorities for Year 1
+- Growth plan for staffing
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"organization_personnel": result}
-
+    return {"organization_personnel": ask_llm(prompt)}
 
 
 def investment_plan_node(state: State) -> State:
-
     prompt = f"""
-You are a financial investment advisor.
+You are an investment advisor.
 
-Based on the following description, write a compelling **Investment Plan**.
-Include capital required, funding stages, and what the investment will be used for. Use Markdown.
+Generate the **Investment Plan** section in Markdown. Include:
+
+- Funding needed (pre-seed, seed, Series A, etc.)
+- Use of funds breakdown
+- Proposed investor terms or equity
+- Expected outcomes from each funding stage
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"investment_plan": result}
-
+    return {"investment_plan": ask_llm(prompt)}
 
 
 def income_cashflow_forecast_node(state: State) -> State:
-
     prompt = f"""
-You are a financial expert.
+You are a financial modeling expert.
 
-Based on the company description below, write a detailed **Forecast of Income Statement and Cash Flow**.
-Use Markdown format and include key revenue streams, monthly income projections, and expected cash flow.
+Create a **Forecast of Income Statement and Cash Flow** in Markdown. Include:
+
+- Assumptions (ARPU, CAC, churn, etc.)
+- Revenue and cost forecast (Year 1–3)
+- Cash inflow and outflow estimates
+- Optional tables to support clarity
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"income_cashflow_forecast": result}
-
+    return {"income_cashflow_forecast": ask_llm(prompt)}
 
 
 def financial_plan_node(state: State) -> State:
-
     prompt = f"""
-You are a professional financial advisor.
+You are a business financial planner.
 
-Using the company description below, write a detailed and realistic **Financial Plan** section for a business plan. 
-Use clear Markdown formatting and structure your response with the following key areas:
+Generate a comprehensive **Financial Plan** in Markdown. Include:
 
-- **Startup Costs**: estimated initial investment (equipment, software, staff, etc.)
-- **Revenue Projections**: monthly or quarterly revenue for the first year
-- **Break-even Analysis**: when the company expects to cover its costs
-- **Cost Structure**: fixed and variable costs
-- **Funding Needs**: how much capital is needed and what it will be used for
-
-Make reasonable assumptions when necessary, and ensure clarity for potential investors or stakeholders.
+- Startup costs and capex
+- Operating costs (fixed and variable)
+- Revenue streams and pricing logic
+- Break-even analysis
+- Financial KPIs (ROI, EBITDA margin, gross margin)
+- Sensitivity or risk factors
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"financial_plan": result}
-
+    return {"financial_plan": ask_llm(prompt)}
 
 
 def legal_aspects_node(state: State) -> State:
-
     prompt = f"""
 You are a legal advisor for startups.
 
-Based on the company description, write the **Legal Aspects** section.
-Include legal structure, intellectual property, licenses, and regulatory considerations.
-Use Markdown format.
+Write the **Legal Aspects** section in Markdown. Include:
+
+- Legal structure (LLC, C-Corp, etc.)
+- IP and trademarks
+- Contracts or licenses needed
+- Regulatory compliance relevant to the market
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"legal_aspects": result}
-
+    return {"legal_aspects": ask_llm(prompt)}
 
 
 def risk_assessment_node(state: State) -> State:
-
     prompt = f"""
-You are a business risk consultant.
+You are a business risk manager.
 
-Using the company description, write a **Risk Assessment** section.
-Identify main business risks (financial, operational, market, etc.) and suggest mitigation strategies.
-Use Markdown format.
+Write a **Risk Assessment** in Markdown. Include:
+
+- Key risk categories: market, financial, legal, technical
+- How each risk may impact the business
+- Mitigation strategies or contingency plans
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-    
-    return {"risk_assessment": result}
-
+    return {"risk_assessment": ask_llm(prompt)}
 
 
 def contingency_coverage_node(state: State) -> State:
-
     prompt = f"""
-You are a strategic planner.
+You are a strategic operations expert.
 
-Based on the company description, write a **Main Contingencies and Coverage** section.
-List major potential problems and backup plans or strategies for handling them. Use Markdown format.
+Write the **Main Contingencies and Coverage** section in Markdown. List:
+
+- Critical operational risks
+- Failover or response strategies
+- Backup systems or workflows
+- Insurance or financial coverage plans
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"contingency_coverage": result}
-
+    return {"contingency_coverage": ask_llm(prompt)}
 
 
 def csr_node(state: State) -> State:
-
     prompt = f"""
 You are a sustainability and ethics advisor.
 
-Based on the company description, write a clear **Corporate Social Responsibility (CSR)** section.
-Include environmental goals, social impact, and ethical practices. Use Markdown format.
+Generate a **Corporate Social Responsibility (CSR)** section in Markdown. Include:
+
+- Environmental sustainability plans
+- Social/community engagement
+- Governance and ethical practices
+- Measurable CSR goals if applicable
 
 Company Description:
 {state['company_description']}
 """
-    result = ask_llm(prompt)
-
-    return {"csr": result}
-
-
-######################################################################################################
+    return {"csr": ask_llm(prompt)}
 
 
 def merge_to_markdown_node(state: State) -> State:
@@ -379,71 +348,58 @@ def merge_to_markdown_node(state: State) -> State:
     for idx, section in enumerate(sections, 1):
         title = section.replace("_", " ").title()
         content = state.get(section, "*No content available.*")
-
         toc += f"{idx}. {title}\n"
         body += f"\n## {idx}. {title}\n{content}\n\n---\n"
 
-    markdown = f"# Business Plan\n\n{toc}\n{body}"
+    markdown = f"# Business Plan\n\n{toc}\n\n{body}"
     return {"final_markdown": markdown}
 
 
-### langgraph Graph Builder ###
+
+### BUILD GRAPH ###
 
 graph_builder = StateGraph(State)
 
 graph_builder.add_node("convert_form", convert_form_node)
 graph_builder.add_node("company_describer", company_description_node)
 
+# business sections
+section_nodes = {
+    "node_executive_summary": executive_summary_node,
+    "node_project_team": project_team_node,
+    "node_product_description": product_description_node,
+    "node_market_analysis": market_analysis_node,
+    "node_marketing_plan": marketing_plan_node,
+    "node_production_plan": production_plan_node,
+    "node_organization_personnel": organization_personnel_node,
+    "node_investment_plan": investment_plan_node,
+    "node_income_cashflow_forecast": income_cashflow_forecast_node,
+    "node_financial_plan": financial_plan_node,
+    "node_legal_aspects": legal_aspects_node,
+    "node_risk_assessment": risk_assessment_node,
+    "node_contingency_coverage": contingency_coverage_node,
+    "node_csr": csr_node,
+}
 
-### <business_plan_sections nodes> ###
-
-graph_builder.add_node("node_executive_summary", executive_summary_node)
-graph_builder.add_node("node_project_team", project_team_node)
-graph_builder.add_node("node_product_description", product_description_node)
-graph_builder.add_node("node_market_analysis", market_analysis_node)
-graph_builder.add_node("node_marketing_plan", marketing_plan_node)
-graph_builder.add_node("node_production_plan", production_plan_node)
-graph_builder.add_node("node_organization_personnel", organization_personnel_node)
-graph_builder.add_node("node_investment_plan", investment_plan_node)
-graph_builder.add_node("node_income_cashflow_forecast", income_cashflow_forecast_node)
-graph_builder.add_node("node_financial_plan", financial_plan_node)
-graph_builder.add_node("node_legal_aspects", legal_aspects_node)
-graph_builder.add_node("node_risk_assessment", risk_assessment_node)
-graph_builder.add_node("node_contingency_coverage", contingency_coverage_node)
-graph_builder.add_node("node_csr", csr_node)
-
-### </business_plan_sections nodes> ###
+for name, func in section_nodes.items():
+    graph_builder.add_node(name, func)
 
 graph_builder.add_node("merge_to_markdown", merge_to_markdown_node)
 
 
+# graph logic
 graph_builder.set_entry_point("convert_form")
 graph_builder.add_edge("convert_form", "company_describer")
 
-business_plan_sections = [
-    "node_executive_summary",
-    "node_project_team",
-    "node_product_description",
-    "node_market_analysis",
-    "node_marketing_plan",
-    "node_production_plan",
-    "node_organization_personnel",
-    "node_investment_plan",
-    "node_income_cashflow_forecast",
-    "node_financial_plan",
-    "node_legal_aspects",
-    "node_risk_assessment",
-    "node_contingency_coverage",
-    "node_csr"
-]
+for name in section_nodes:
+    graph_builder.add_edge("company_describer", name)
+    graph_builder.add_edge(name, "merge_to_markdown")
 
-for node in business_plan_sections:
-    graph_builder.add_edge("company_describer", node)
-    graph_builder.add_edge(node, "merge_to_markdown")
 
 graph_builder.set_finish_point("merge_to_markdown")
 
 graph = graph_builder.compile()
+
 
 def run_business_plan_pipeline(data: dict) -> dict:
     return graph.invoke({"raw_data": data})

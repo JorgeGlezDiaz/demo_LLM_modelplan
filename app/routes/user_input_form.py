@@ -20,7 +20,7 @@ async def submit_form(
     key_resources: str = Form(...),
     key_activities: str = Form(...),
     key_partnerships: str = Form(...),
-    cost_structure: str = Form(...),
+    cost_structure: str = Form(...)
 ):
     data = {
         "customer_segments": customer_segments,

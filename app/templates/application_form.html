@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Business Model Canvas Form</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #f5f8fa;
@@ -50,13 +47,7 @@
       margin-right: 10px;
     }
 
-    .section-divider {
-      height: 1px;
-      background-color: #ddd;
-      margin: 20px 0;
-    }
-
-    button.btn-primary {
+    .btn-primary {
       padding: 10px 25px;
       font-size: 1.1rem;
       border-radius: 8px;
@@ -71,71 +62,71 @@
     <div id="form-alert" class="alert alert-danger d-none" role="alert"></div>
 
     <form id="business-form" method="POST" action="/submit-form" onsubmit="return validateForm(event)" novalidate>
-      
-      <!-- Customer Segments -->
+
+      <!-- 👥 Customer Segments -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">👥</span> Customer Segments</h4>
-        <label class="form-label">Who are your customer segments?</label>
+        <label class="form-label">Who are your primary customer segments, and what are their most important needs, behaviors, and characteristics?</label>
         <textarea class="form-control" name="customer_segments" required></textarea>
       </div>
 
-      <!-- Value Propositions -->
+      <!-- 🎯 Value Propositions -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">🎯</span> Value Propositions</h4>
-        <label class="form-label">What value do you deliver to your customers?</label>
+        <label class="form-label">What specific problem are you solving, and what clear value do you deliver to your customers through your solution?</label>
         <textarea class="form-control" name="value_propositions" required></textarea>
       </div>
 
-      <!-- Channels -->
+      <!-- 📢 Channels -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">📢</span> Channels</h4>
-        <label class="form-label">How do you deliver your value proposition to customers?</label>
+        <label class="form-label">Through which channels do you plan to reach your customers, deliver your value, and build brand awareness?</label>
         <textarea class="form-control" name="channels" required></textarea>
       </div>
 
-      <!-- Customer Relationships -->
+      <!-- 💬 Customer Relationships -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">💬</span> Customer Relationships</h4>
-        <label class="form-label">What kind of relationship will you maintain with your customers?</label>
+        <label class="form-label">What kind of relationships will you build and maintain with your customers, and how will you manage them?</label>
         <textarea class="form-control" name="customer_relationships" required></textarea>
       </div>
 
-      <!-- Revenue Streams -->
+      <!-- 💸 Revenue Streams -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">💸</span> Revenue Streams</h4>
-        <label class="form-label">How will your business generate income?</label>
+        <label class="form-label">How will your business make money, and what pricing strategy will you adopt for long-term profitability?</label>
         <textarea class="form-control" name="revenue_streams" required></textarea>
       </div>
 
-      <!-- Key Resources -->
+      <!-- 🧰 Key Resources -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">🧰</span> Key Resources</h4>
-        <label class="form-label">What resources are essential for delivering your value proposition?</label>
+        <label class="form-label">What key assets—human, technological, physical, or financial—do you need to create and deliver your value?</label>
         <textarea class="form-control" name="key_resources" required></textarea>
       </div>
 
-      <!-- Key Activities -->
+      <!-- ⚙️ Key Activities -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">⚙️</span> Key Activities</h4>
-        <label class="form-label">What activities do you need to perform well?</label>
+        <label class="form-label">What essential activities must your team perform to deliver on your promise and operate successfully?</label>
         <textarea class="form-control" name="key_activities" required></textarea>
       </div>
 
-      <!-- Key Partnerships -->
+      <!-- 🤝 Key Partnerships -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">🤝</span> Key Partnerships</h4>
-        <label class="form-label">Who are your key partners and suppliers?</label>
+        <label class="form-label">Who are your strategic partners or suppliers, and how do they support your value chain or business model?</label>
         <textarea class="form-control" name="key_partnerships" required></textarea>
       </div>
 
-      <!-- Cost Structure -->
+      <!-- 🏗️ Cost Structure -->
       <div class="form-section">
         <h4 class="section-title"><span class="emoji">🏗️</span> Cost Structure</h4>
-        <label class="form-label">What are the main costs your business will incur?</label>
+        <label class="form-label">What are the main cost drivers of your business, and how will you manage expenses while scaling?</label>
         <textarea class="form-control" name="cost_structure" required></textarea>
       </div>
 
-      <!-- Submit Button -->
+      <!-- ✅ Submit -->
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
@@ -169,10 +160,7 @@
         alertBox.classList.remove("d-none");
 
         setTimeout(() => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }, 100);
 
         return false;
@@ -181,7 +169,6 @@
       return true;
     }
 
-    // Scroll to top on load
     window.addEventListener("load", () => {
       window.scrollTo(0, 0);
     });
