@@ -141,7 +141,7 @@ Based on the company description, generate a **Market Analysis** section in Mark
 - Target customer profile (demographics, behavior, needs)
 - Market size and TAM/SAM/SOM if inferable
 - Key trends and market dynamics
-- Competitor landscape (3–5 key players)
+- Competitor landscape (3-5 key players)
 - Competitive advantage and differentiation
 
 Company Description:
@@ -228,7 +228,7 @@ You are a financial modeling expert.
 Create a **Forecast of Income Statement and Cash Flow** in Markdown. Include:
 
 - Assumptions (ARPU, CAC, churn, etc.)
-- Revenue and cost forecast (Year 1–3)
+- Revenue and cost forecast (Year 1-3)
 - Cash inflow and outflow estimates
 - Optional tables to support clarity
 
