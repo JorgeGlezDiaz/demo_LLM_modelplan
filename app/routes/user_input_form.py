@@ -30,17 +30,17 @@ async def submit_form(request: Request):
         lines.append(model_data)
 
     # Procesa cada línea por separado con tu pipeline y guarda en estados separados claramente
-    state1 = run_business_plan_pipeline(lines[0])
-    state2 = run_business_plan_pipeline(lines[1])
-    state3 = run_business_plan_pipeline(lines[2])
+    business_plan_1 = run_business_plan_pipeline(lines[0])
+    business_plan_2 = run_business_plan_pipeline(lines[1])
+    business_plan_3 = run_business_plan_pipeline(lines[2])
 
     # Muestra resultados en consola claramente para verificar
-    print("State1 description:", state1["company_description"])
-    print("State2 description:", state2["company_description"])
-    print("State3 description:", state3["company_description"])
+    print("State1 description:", business_plan_1["company_description"])
+    print("State2 description:", business_plan_2["company_description"])
+    print("State3 description:", business_plan_3["company_description"])
 
     # Puedes devolverlos claramente a la plantilla HTML también
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "multi_results": [state1, state2, state3]
+        "multi_results": [business_plan_1, business_plan_2, business_plan_3]
     })

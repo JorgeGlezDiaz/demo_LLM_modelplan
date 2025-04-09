@@ -69,4 +69,94 @@ research, and participating in industry events. ATRINEO maintains efficiency by 
 optimizing internal resource allocation, and focusing on high-value consulting engagements that ensure measurable returns.
 
 
+👥 Customer Segments
+Línea A (ATRINEO):
+ATRINEO primarily works with prestigious scientific institutions such as universities, research centers, and innovation-driven companies. Clients need strategic consulting, operational support, and intellectual property management solutions.
+
+Línea B (EcoTech Solutions):
+EcoTech Solutions targets urban municipalities and commercial property managers who require sustainable waste management and recycling solutions. These clients are driven by regulatory compliance, environmental impact reduction, and cost management.
+
+Línea C (FitLife App):
+FitLife App primarily serves young professionals and fitness enthusiasts aged 20-40 seeking convenient, personalized workout and nutritional guidance. They value health, convenience, digital accessibility, and data-driven recommendations.
+
+🎯 Value Propositions
+Línea A (ATRINEO):
+Specialized consulting and IT system solutions for effective knowledge and technology transfer, bridging the gap from research to market through innovation strategies and capacity-building programs.
+
+Línea B (EcoTech Solutions):
+Providing integrated, eco-friendly waste management systems that significantly reduce environmental impact, ensure compliance with sustainability regulations, and optimize operational efficiency through smart technology.
+
+Línea C (FitLife App):
+Offering a personalized fitness and nutrition app powered by AI, tailored to each user's lifestyle, fitness goals, and dietary preferences, delivering measurable health improvements and convenience through data-driven insights.
+
+📢 Channels
+Línea A (ATRINEO):
+Direct consulting, strategic partnerships, industry conferences, whitepapers, and collaboration with knowledge-transfer alliances.
+
+Línea B (EcoTech Solutions):
+Direct sales to municipalities, partnerships with environmental organizations, targeted email campaigns, industry trade shows, and sustainability-focused webinars.
+
+Línea C (FitLife App):
+Digital marketing via social media influencers, SEO-driven content marketing, partnerships with gyms and wellness brands, online ads, and app store optimization (ASO).
+
+💬 Customer Relationships
+Línea A (ATRINEO):
+Highly personalized, trust-based consulting relationships with continuous project support, training programs, and measurable outcomes.
+
+Línea B (EcoTech Solutions):
+Long-term contractual relationships emphasizing consistent support, regular performance reviews, dedicated account management, and proactive communication about regulatory changes.
+
+Línea C (FitLife App):
+Interactive, digital-first relationships through personalized notifications, AI-driven recommendations, user support via live chat, community engagement through forums and social media.
+
+💸 Revenue Streams
+Línea A (ATRINEO):
+Consulting fees, implementation/licensing of IT systems, professional development workshops, and training program fees.
+
+Línea B (EcoTech Solutions):
+Subscription-based waste management services, sales of recycling equipment, consulting fees for sustainability audits, and maintenance contracts.
+
+Línea C (FitLife App):
+Monthly app subscriptions (freemium model), in-app purchases for premium workout/nutrition plans, sponsored content, and affiliate partnerships.
+
+🧰 Key Resources
+Línea A (ATRINEO):
+Skilled consulting team, proprietary methodologies/tools, strong professional network, and European market reputation.
+
+Línea B (EcoTech Solutions):
+Specialized equipment and technology, qualified environmental engineers, proprietary software for tracking sustainability metrics, strong regulatory knowledge base.
+
+Línea C (FitLife App):
+AI and machine learning algorithms, skilled software development team, partnerships with fitness experts, cloud-based infrastructure, and engaging digital content library.
+
+⚙️ Key Activities
+Línea A (ATRINEO):
+Innovation strategy development, feasibility studies, supporting industry-research collaborations, customized IT system management, and specialized training delivery.
+
+Línea B (EcoTech Solutions):
+Waste audit assessments, system installation and management, sustainability compliance monitoring, customer education, and continuous improvement of recycling technology.
+
+Línea C (FitLife App):
+App development and updates, content creation, algorithm optimization, customer support, data analysis for personalized recommendations, and ongoing digital marketing.
+
+🤝 Key Partnerships
+Línea A (ATRINEO):
+Universities, research institutions, innovation agencies, funding bodies, and international knowledge transfer networks.
+
+Línea B (EcoTech Solutions):
+Environmental regulatory agencies, sustainability-focused NGOs, manufacturers of recycling technologies, and municipal government bodies.
+
+Línea C (FitLife App):
+Fitness influencers, gyms and health clubs, wellness product brands, nutritionists and personal trainers, and technology platforms like Apple Health and Google Fit.
+
+🏗️ Cost Structure
+Línea A (ATRINEO):
+Consulting staff, IT platform development/maintenance, training materials, market research, industry events participation.
+
+Línea B (EcoTech Solutions):
+Equipment procurement, installation and maintenance costs, technical staff salaries, regulatory compliance, research and development for sustainability innovations.
+
+Línea C (FitLife App):
+Software development and maintenance, cloud hosting expenses, content creation costs, marketing and user acquisition, salaries of development and support teams.
+
 

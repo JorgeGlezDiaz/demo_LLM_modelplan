@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Generated Business Plan</title>
+  <title>Generated Business Plans</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -14,6 +14,7 @@
       border-radius: 12px;
       padding: 30px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
     }
     .description-title {
       font-size: 1.8rem;
@@ -31,34 +32,38 @@
   </style>
 </head>
 <body>
+  {% for result, label in zip(multi_results, ['A', 'B', 'C']) %}
   <div class="description-box">
-    <!-- Nueva sección: descripción de empresa -->
+    <h3 class="text-center">Business Line {{ label }}</h3>
+
+    <!-- Company description -->
     <div class="mb-4">
       <h5 class="description-title">🏢 Company Description</h5>
-      <pre>{{ company_description }}</pre>
+      <pre>{{ result.company_description }}</pre>
     </div>
-  
-    <!-- Plan de negocio completo -->
+
+    <!-- Generated business plan -->
     <div class="mb-4">
       <h5 class="description-title">📄 Generated Business Plan</h5>
-      <pre id="markdown-content">{{ description }}</pre>
+      <pre id="markdown-content-{{ loop.index }}">{{ result.final_markdown }}</pre>
     </div>
-  
+
     <div class="btn-group">
       <a href="/application-form" class="btn btn-secondary">⬅ Back to Form</a>
-      <button class="btn btn-success" onclick="downloadMarkdown()">⬇ Download as .md</button>
+      <button class="btn btn-success" onclick="downloadMarkdown({{ loop.index }})">⬇ Download as .md</button>
     </div>
   </div>
+  {% endfor %}
 
   <script>
-    function downloadMarkdown() {
-      const content = document.getElementById("markdown-content").innerText;
+    function downloadMarkdown(index) {
+      const content = document.getElementById(`markdown-content-${index}`).innerText;
       const blob = new Blob([content], { type: "text/markdown" });
       const url = URL.createObjectURL(blob);
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = "business_plan.md";
+      a.download = `business_plan_line_${index}.md`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

@@ -9,7 +9,6 @@ llm = ChatOllama(model="llama3.2:latest")
 class State(TypedDict):
     raw_data: str
     company_description: str
-
     executive_summary: str
     project_team: str
     product_description: str
@@ -24,8 +23,9 @@ class State(TypedDict):
     risk_assessment: str
     contingency_coverage: str
     csr: str
-
     final_markdown: str
+
+
 
 
 def ask_llm(prompt: str) -> str:
@@ -404,25 +404,12 @@ graph = graph_builder.compile()
 
 def run_business_plan_pipeline(data: dict) -> State:
     # Inicializa correctamente tu estado con raw_data como JSON
-    initial_state = {
-        "raw_data": json.dumps(data),
-        "company_description": "",
-        "executive_summary": "",
-        "project_team": "",
-        "product_description": "",
-        "market_analysis": "",
-        "marketing_plan": "",
-        "production_plan": "",
-        "organization_personnel": "",
-        "investment_plan": "",
-        "income_cashflow_forecast": "",
-        "financial_plan": "",
-        "legal_aspects": "",
-        "risk_assessment": "",
-        "contingency_coverage": "",
-        "csr": "",
-        "final_markdown": ""
-    }
+    data_str = str()
+    for key in data:
+        data_str += key + ": " + data[key] 
+
+    print("esto es tu dump: \n ",data_str)
+    state = State({"raw_data":json.dumps(data)})
     # Ejecuta claramente el graph.invoke con un único estado inicial
-    final_state = graph.invoke(initial_state)
+    final_state = graph.invoke(state)
     return final_state
