@@ -2,7 +2,7 @@ from langchain_ollama import ChatOllama
 from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
-
+import json
 llm = ChatOllama(model="llama3.2:latest")
 
 
@@ -41,9 +41,10 @@ def convert_input_into_markdown(data: dict) -> str:
 ### NODES ###
 
 def convert_form_node(state: dict) -> State:
-    result = convert_input_into_markdown(state["raw_data"])
-    return {"raw_data": result}
-
+    raw_data_dict = json.loads(state["raw_data"])  # Ahora sí es un dict correctamente
+    result = convert_input_into_markdown(raw_data_dict)
+    state["raw_data"] = result
+    return state
 
 def company_description_node(state: State) -> State:
     prompt = f"""
@@ -401,5 +402,27 @@ graph_builder.set_finish_point("merge_to_markdown")
 graph = graph_builder.compile()
 
 
-def run_business_plan_pipeline(data: dict) -> dict:
-    return graph.invoke({"raw_data": data})
+def run_business_plan_pipeline(data: dict) -> State:
+    # Inicializa correctamente tu estado con raw_data como JSON
+    initial_state = {
+        "raw_data": json.dumps(data),
+        "company_description": "",
+        "executive_summary": "",
+        "project_team": "",
+        "product_description": "",
+        "market_analysis": "",
+        "marketing_plan": "",
+        "production_plan": "",
+        "organization_personnel": "",
+        "investment_plan": "",
+        "income_cashflow_forecast": "",
+        "financial_plan": "",
+        "legal_aspects": "",
+        "risk_assessment": "",
+        "contingency_coverage": "",
+        "csr": "",
+        "final_markdown": ""
+    }
+    # Ejecuta claramente el graph.invoke con un único estado inicial
+    final_state = graph.invoke(initial_state)
+    return final_state
