@@ -32,7 +32,9 @@
   </style>
 </head>
 <body>
-  {% for result, label in zip(multi_results, ['A', 'B', 'C']) %}
+  {% for result in multi_results %}
+    {% set label = ['A', 'B', 'C'][loop.index0] %}
+
   <div class="description-box">
     <h3 class="text-center">Business Line {{ label }}</h3>
 
