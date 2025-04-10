@@ -34,12 +34,6 @@ async def submit_form(request: Request):
     business_plan_2 = run_business_plan_pipeline(lines[1])
     business_plan_3 = run_business_plan_pipeline(lines[2])
 
-    # Muestra resultados en consola claramente para verificar
-    print("State1 description:", business_plan_1["company_description"])
-    print("State2 description:", business_plan_2["company_description"])
-    print("State3 description:", business_plan_3["company_description"])
-
-    # Puedes devolverlos claramente a la plantilla HTML también
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
         "multi_results": [business_plan_1, business_plan_2, business_plan_3]

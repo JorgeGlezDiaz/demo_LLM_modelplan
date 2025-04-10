@@ -403,13 +403,6 @@ graph = graph_builder.compile()
 
 
 def run_business_plan_pipeline(data: dict) -> State:
-    # Inicializa correctamente tu estado con raw_data como JSON
-    data_str = str()
-    for key in data:
-        data_str += key + ": " + data[key] 
-
-    print("esto es tu dump: \n ",data_str)
     state = State({"raw_data":json.dumps(data)})
-    # Ejecuta claramente el graph.invoke con un único estado inicial
     final_state = graph.invoke(state)
     return final_state
