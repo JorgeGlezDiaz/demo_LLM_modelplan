@@ -1,162 +1,62 @@
 👥 Customer Segments
-ATRINEO primarily works with prestigious scientific institutions such as universities, 
-research centers, and innovation-driven companies. These clients require expert support 
-in structuring and managing the transfer of knowledge and technology. They often need 
-guidance in defining strategies, establishing processes, and implementing systems for 
-innovation and commercialization. The typical clients are public and private research 
-institutions, R&D-intensive companies, technology transfer offices, and innovation-driven 
-SMEs. Their main expectations revolve around receiving strategic consulting, operational 
-support in innovation system deployment, and tools to manage intellectual property and 
-transfer processes effectively.
+Line A: ATRINEO serves prestigious scientific institutions such as universities, research centers, and innovation-driven companies. These clients seek strategic consulting, operational support, and intellectual property management systems.
+
+Line B: ATRINEO’s waste management line targets urban municipalities and commercial property managers in need of sustainable solutions. Their key needs include regulatory compliance, environmental impact reduction, and cost optimization.
+
+Line C: ATRINEO’s wellness tech division targets young professionals and fitness enthusiasts aged 20–40 looking for personalized, digital-first fitness and nutrition guidance.
 
 🎯 Value Propositions
-ATRINEO offers specialized consulting and system solutions that address the full cycle of 
-knowledge and technology transfer—from identification and evaluation to development and 
-commercialization. It delivers value by providing expert feasibility studies, tailored 
-innovation strategies, and the implementation of customizable IT systems for managing 
-intellectual property and collaborations. The company also supports its clients through 
-capacity-building programs designed to strengthen institutional innovation capabilities. 
-ATRINEO helps organizations bridge the gap between research and market, creating measurable 
-impact through innovation.
+Line A: Offers expert consulting and IT solutions for knowledge and technology transfer, guiding organizations from research to market through tailored innovation strategies and capacity-building.
+
+Line B: Delivers integrated, eco-friendly waste management systems that reduce environmental impact, comply with regulations, and increase operational efficiency through smart technologies.
+
+Line C: Provides an AI-powered mobile app that delivers personalized workout and nutrition plans based on user data, preferences, and health goals.
 
 📢 Channels
-ATRINEO reaches its clients through direct consulting engagements and long-term strategic 
-partnerships. It also engages audiences through its participation in academic and industry 
-conferences and through content shared on its website, including whitepapers, reports, and 
-success stories. Collaborations with alliances and associations focused on knowledge transfer 
-further expand its visibility. These channels allow ATRINEO to maintain a strong presence 
-within a specialized market and build meaningful, lasting client relationships.
+Line A: Direct consulting engagements, strategic partnerships, conference presentations, publication of whitepapers, and participation in innovation alliances.
+
+Line B: Direct sales to municipalities, collaborations with environmental groups, email campaigns, trade shows, and sustainability-focused webinars.
+
+Line C: Digital marketing via influencers, SEO-rich content, app store optimization, and partnerships with wellness brands and gyms.
 
 💬 Customer Relationships
-ATRINEO builds highly personalized relationships by offering tailored consulting based on each 
-client's institutional context. It provides ongoing support throughout technology transfer and 
-innovation projects, along with targeted training programs. The company’s partnership-oriented 
-model is grounded in trust, collaboration, and clearly measurable outcomes, fostering strong 
-long-term engagements with its clients.
+Line A: Maintains trust-based, personalized relationships through tailored support, training, and measurable innovation outcomes.
+
+Line B: Builds long-term contracts supported by proactive communication, regulatory updates, and dedicated service teams.
+
+Line C: Leverages digital-first, interactive relationships with AI-driven personalization, in-app support, and community engagement.
 
 💸 Revenue Streams
-The company’s revenue model is service-oriented and based on consulting fees from innovation 
-and tech transfer projects. Additional income comes from implementing and licensing customized 
-information management systems. ATRINEO also generates revenue through its educational offerings, 
-such as professional development workshops and training programs. This combination of consulting, 
-systems, and training ensures a diversified and sustainable business model built on long-term value
- delivery.
+Line A: Consulting fees, IT system licensing, training program revenues, and workshop facilitation.
+
+Line B: Subscriptions for waste services, equipment sales, sustainability audits, and service contracts.
+
+Line C: Freemium mobile subscriptions, premium plan upgrades, sponsored content, and affiliate programs.
 
 🧰 Key Resources
-ATRINEO's key resources include a highly skilled consulting team with deep expertise in technology 
-transfer, market research, and innovation strategy. It also leverages proprietary methodologies and 
-tools developed in-house to optimize client processes. A strong reputation and extensive professional 
-network across Europe are central to its ability to secure impactful projects and partnerships.
+Line A: Consulting talent, proprietary methodologies, a strong institutional network, and reputation in European innovation ecosystems.
+
+Line B: Specialized waste technology, environmental engineers, compliance expertise, and sustainability tracking tools.
+
+Line C: AI/ML algorithms, app development team, expert content creators, and cloud infrastructure.
 
 ⚙️ Key Activities
-The company's core activities include developing and implementing innovation strategies, conducting 
-market and feasibility studies, and supporting collaborative projects between industry and research. 
-It also builds and maintains customized information systems to manage innovation workflows and delivers 
-specialized training in intellectual property, innovation, and commercialization. These activities are 
-performed with a structured, impact-driven approach.
+Line A: Developing innovation strategies, performing feasibility studies, managing IT systems, and delivering training programs.
+
+Line B: Conducting waste audits, installing systems, ensuring compliance, and improving recycling processes.
+
+Line C: Developing the app, producing content, refining algorithms, and supporting customers.
 
 🤝 Key Partnerships
-ATRINEO collaborates closely with universities, research institutions, and innovation agencies. 
-It also works with funding bodies, startups, and SMEs engaged in commercializing research. Cross-border 
-collaboration is enabled through partnerships with international networks focused on knowledge transfer 
-and innovation. These alliances extend ATRINEO’s impact and support the realization of complex, multi-stakeholder 
-innovation projects.
+Line A: Collaborates with universities, research hubs, innovation agencies, and international knowledge networks.
+
+Line B: Works with NGOs, regulators, recycling tech providers, and public sector stakeholders.
+
+Line C: Partners with fitness influencers, gyms, nutritionists, wellness brands, and tech platforms like Apple Health.
 
 🏗️ Cost Structure
-The company's main costs stem from its expert consulting staff and the development and maintenance of its 
-proprietary platforms and tools. Additional costs are associated with creating training materials, conducting 
-research, and participating in industry events. ATRINEO maintains efficiency by applying lean project management,
-optimizing internal resource allocation, and focusing on high-value consulting engagements that ensure measurable returns.
+Line A: Salaries for consultants, IT system development, training content creation, and event participation.
 
+Line B: Equipment costs, maintenance, staff salaries, regulatory work, and ongoing R&D for green tech.
 
-👥 Customer Segments
-Línea A (ATRINEO):
-ATRINEO primarily works with prestigious scientific institutions such as universities, research centers, and innovation-driven companies. Clients need strategic consulting, operational support, and intellectual property management solutions.
-
-Línea B (EcoTech Solutions):
-EcoTech Solutions targets urban municipalities and commercial property managers who require sustainable waste management and recycling solutions. These clients are driven by regulatory compliance, environmental impact reduction, and cost management.
-
-Línea C (FitLife App):
-FitLife App primarily serves young professionals and fitness enthusiasts aged 20-40 seeking convenient, personalized workout and nutritional guidance. They value health, convenience, digital accessibility, and data-driven recommendations.
-
-🎯 Value Propositions
-Línea A (ATRINEO):
-Specialized consulting and IT system solutions for effective knowledge and technology transfer, bridging the gap from research to market through innovation strategies and capacity-building programs.
-
-Línea B (EcoTech Solutions):
-Providing integrated, eco-friendly waste management systems that significantly reduce environmental impact, ensure compliance with sustainability regulations, and optimize operational efficiency through smart technology.
-
-Línea C (FitLife App):
-Offering a personalized fitness and nutrition app powered by AI, tailored to each user's lifestyle, fitness goals, and dietary preferences, delivering measurable health improvements and convenience through data-driven insights.
-
-📢 Channels
-Línea A (ATRINEO):
-Direct consulting, strategic partnerships, industry conferences, whitepapers, and collaboration with knowledge-transfer alliances.
-
-Línea B (EcoTech Solutions):
-Direct sales to municipalities, partnerships with environmental organizations, targeted email campaigns, industry trade shows, and sustainability-focused webinars.
-
-Línea C (FitLife App):
-Digital marketing via social media influencers, SEO-driven content marketing, partnerships with gyms and wellness brands, online ads, and app store optimization (ASO).
-
-💬 Customer Relationships
-Línea A (ATRINEO):
-Highly personalized, trust-based consulting relationships with continuous project support, training programs, and measurable outcomes.
-
-Línea B (EcoTech Solutions):
-Long-term contractual relationships emphasizing consistent support, regular performance reviews, dedicated account management, and proactive communication about regulatory changes.
-
-Línea C (FitLife App):
-Interactive, digital-first relationships through personalized notifications, AI-driven recommendations, user support via live chat, community engagement through forums and social media.
-
-💸 Revenue Streams
-Línea A (ATRINEO):
-Consulting fees, implementation/licensing of IT systems, professional development workshops, and training program fees.
-
-Línea B (EcoTech Solutions):
-Subscription-based waste management services, sales of recycling equipment, consulting fees for sustainability audits, and maintenance contracts.
-
-Línea C (FitLife App):
-Monthly app subscriptions (freemium model), in-app purchases for premium workout/nutrition plans, sponsored content, and affiliate partnerships.
-
-🧰 Key Resources
-Línea A (ATRINEO):
-Skilled consulting team, proprietary methodologies/tools, strong professional network, and European market reputation.
-
-Línea B (EcoTech Solutions):
-Specialized equipment and technology, qualified environmental engineers, proprietary software for tracking sustainability metrics, strong regulatory knowledge base.
-
-Línea C (FitLife App):
-AI and machine learning algorithms, skilled software development team, partnerships with fitness experts, cloud-based infrastructure, and engaging digital content library.
-
-⚙️ Key Activities
-Línea A (ATRINEO):
-Innovation strategy development, feasibility studies, supporting industry-research collaborations, customized IT system management, and specialized training delivery.
-
-Línea B (EcoTech Solutions):
-Waste audit assessments, system installation and management, sustainability compliance monitoring, customer education, and continuous improvement of recycling technology.
-
-Línea C (FitLife App):
-App development and updates, content creation, algorithm optimization, customer support, data analysis for personalized recommendations, and ongoing digital marketing.
-
-🤝 Key Partnerships
-Línea A (ATRINEO):
-Universities, research institutions, innovation agencies, funding bodies, and international knowledge transfer networks.
-
-Línea B (EcoTech Solutions):
-Environmental regulatory agencies, sustainability-focused NGOs, manufacturers of recycling technologies, and municipal government bodies.
-
-Línea C (FitLife App):
-Fitness influencers, gyms and health clubs, wellness product brands, nutritionists and personal trainers, and technology platforms like Apple Health and Google Fit.
-
-🏗️ Cost Structure
-Línea A (ATRINEO):
-Consulting staff, IT platform development/maintenance, training materials, market research, industry events participation.
-
-Línea B (EcoTech Solutions):
-Equipment procurement, installation and maintenance costs, technical staff salaries, regulatory compliance, research and development for sustainability innovations.
-
-Línea C (FitLife App):
-Software development and maintenance, cloud hosting expenses, content creation costs, marketing and user acquisition, salaries of development and support teams.
-
-
+Line C: Software development, server costs, marketing, content creation, and user acquisition.
