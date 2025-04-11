@@ -94,12 +94,12 @@ Write the full company description below:
 
 
 ### BUSINESS PLAN SECTION NODES ###
-
 def executive_summary_node(state: State) -> State:
     prompt = f"""
 You are a business strategist and investor pitch expert.
 
-Using the company description below, write an **Executive Summary** in Markdown. It should be persuasive and concise (max 350 words), highlighting:
+Using the company description below, write an **Executive Summary** in Markdown. 
+Be persuasive and concise. **Limit your response to a maximum of 250 words (~500 tokens)**. Highlight:
 
 - A strong opening hook
 - The key problem addressed
@@ -112,6 +112,8 @@ Using the company description below, write an **Executive Summary** in Markdown.
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: executive_summary_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"executive_summary": ask_llm(prompt)}
 
 
@@ -119,18 +121,19 @@ def project_team_node(state: State) -> State:
     prompt = f"""
 You are an HR and startup advisor.
 
-Based on the company description, describe the **Project Promotion Team** in Markdown format. Include:
+Based on the company description, describe the **Project Promotion Team** in Markdown format.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Key roles and responsibilities
 - Required expertise
 - Suggested team structure
 - Justification for these roles in early-stage operations
 
-If the original input lacks specifics, infer plausible but realistic startup team members.
-
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: project_team_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"project_team": ask_llm(prompt)}
 
 
@@ -138,7 +141,8 @@ def product_description_node(state: State) -> State:
     prompt = f"""
 You are a product strategy consultant.
 
-Write a detailed **Product or Service Description** in Markdown. Include:
+Write a detailed **Product or Service Description** in Markdown. 
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - What it is and how it works
 - Features and benefits
@@ -149,6 +153,8 @@ Write a detailed **Product or Service Description** in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: product_description_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"product_description": ask_llm(prompt)}
 
 
@@ -156,7 +162,8 @@ def market_analysis_node(state: State) -> State:
     prompt = f"""
 You are a senior market analyst.
 
-Based on the company description, generate a **Market Analysis** section in Markdown that includes:
+Based on the company description, generate a **Market Analysis** section in Markdown. 
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Target customer profile (demographics, behavior, needs)
 - Market size and TAM/SAM/SOM if inferable
@@ -167,6 +174,8 @@ Based on the company description, generate a **Market Analysis** section in Mark
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: market_analysis_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"market_analysis": ask_llm(prompt)}
 
 
@@ -174,7 +183,8 @@ def marketing_plan_node(state: State) -> State:
     prompt = f"""
 You are a marketing and growth strategist.
 
-Using the company description, write a **Marketing Plan** in Markdown. Include:
+Using the company description, write a **Marketing Plan** in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Positioning and branding strategy
 - Customer acquisition channels
@@ -186,6 +196,8 @@ Using the company description, write a **Marketing Plan** in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: marketing_plan_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"marketing_plan": ask_llm(prompt)}
 
 
@@ -193,7 +205,8 @@ def production_plan_node(state: State) -> State:
     prompt = f"""
 You are a production and operations expert.
 
-Create a **Production Plan** in Markdown based on the company description. Cover:
+Create a **Production Plan** in Markdown based on the company description.
+**Limit your response to 250 words (~500 tokens)**. Cover:
 
 - Product/service development phases
 - Key operational steps
@@ -204,6 +217,8 @@ Create a **Production Plan** in Markdown based on the company description. Cover
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: production_plan_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"production_plan": ask_llm(prompt)}
 
 
@@ -211,7 +226,8 @@ def organization_personnel_node(state: State) -> State:
     prompt = f"""
 You are an organizational designer for startups.
 
-Write the **Organization and Personnel** section in Markdown. Include:
+Write the **Organization and Personnel** section in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Organizational structure
 - Core departments and their functions
@@ -221,6 +237,8 @@ Write the **Organization and Personnel** section in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: organization_personnel_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"organization_personnel": ask_llm(prompt)}
 
 
@@ -228,7 +246,8 @@ def investment_plan_node(state: State) -> State:
     prompt = f"""
 You are an investment advisor.
 
-Generate the **Investment Plan** section in Markdown. Include:
+Generate the **Investment Plan** section in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Funding needed (pre-seed, seed, Series A, etc.)
 - Use of funds breakdown
@@ -238,6 +257,8 @@ Generate the **Investment Plan** section in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: investment_plan_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"investment_plan": ask_llm(prompt)}
 
 
@@ -245,16 +266,19 @@ def income_cashflow_forecast_node(state: State) -> State:
     prompt = f"""
 You are a financial modeling expert.
 
-Create a **Forecast of Income Statement and Cash Flow** in Markdown. Include:
+Create a **Forecast of Income Statement and Cash Flow** in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Assumptions (ARPU, CAC, churn, etc.)
-- Revenue and cost forecast (Year 1-3)
+- Revenue and cost forecast (Year 1–3)
 - Cash inflow and outflow estimates
 - Optional tables to support clarity
 
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: income_cashflow_forecast_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"income_cashflow_forecast": ask_llm(prompt)}
 
 
@@ -262,7 +286,8 @@ def financial_plan_node(state: State) -> State:
     prompt = f"""
 You are a business financial planner.
 
-Generate a comprehensive **Financial Plan** in Markdown. Include:
+Generate a comprehensive **Financial Plan** in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Startup costs and capex
 - Operating costs (fixed and variable)
@@ -274,6 +299,8 @@ Generate a comprehensive **Financial Plan** in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: financial_plan_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"financial_plan": ask_llm(prompt)}
 
 
@@ -281,7 +308,8 @@ def legal_aspects_node(state: State) -> State:
     prompt = f"""
 You are a legal advisor for startups.
 
-Write the **Legal Aspects** section in Markdown. Include:
+Write the **Legal Aspects** section in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Legal structure (LLC, C-Corp, etc.)
 - IP and trademarks
@@ -291,6 +319,8 @@ Write the **Legal Aspects** section in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: legal_aspects_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"legal_aspects": ask_llm(prompt)}
 
 
@@ -298,7 +328,8 @@ def risk_assessment_node(state: State) -> State:
     prompt = f"""
 You are a business risk manager.
 
-Write a **Risk Assessment** in Markdown. Include:
+Write a **Risk Assessment** in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Key risk categories: market, financial, legal, technical
 - How each risk may impact the business
@@ -307,6 +338,8 @@ Write a **Risk Assessment** in Markdown. Include:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: risk_assessment_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"risk_assessment": ask_llm(prompt)}
 
 
@@ -314,7 +347,8 @@ def contingency_coverage_node(state: State) -> State:
     prompt = f"""
 You are a strategic operations expert.
 
-Write the **Main Contingencies and Coverage** section in Markdown. List:
+Write the **Main Contingencies and Coverage** section in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Critical operational risks
 - Failover or response strategies
@@ -324,6 +358,8 @@ Write the **Main Contingencies and Coverage** section in Markdown. List:
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: contingency_coverage_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"contingency_coverage": ask_llm(prompt)}
 
 
@@ -331,7 +367,8 @@ def csr_node(state: State) -> State:
     prompt = f"""
 You are a sustainability and ethics advisor.
 
-Generate a **Corporate Social Responsibility (CSR)** section in Markdown. Include:
+Generate a **Corporate Social Responsibility (CSR)** section in Markdown.
+**Limit your response to 250 words (~500 tokens)**. Include:
 
 - Environmental sustainability plans
 - Social/community engagement
@@ -341,6 +378,8 @@ Generate a **Corporate Social Responsibility (CSR)** section in Markdown. Includ
 Company Description:
 {state['company_description']}
 """
+    print("🔍 Ejecutando nodo: csr_node")
+    print(f"🧪 Prompt size: {len(prompt)} chars")
     return {"csr": ask_llm(prompt)}
 
 
