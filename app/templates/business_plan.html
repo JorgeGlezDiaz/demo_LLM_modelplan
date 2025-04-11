@@ -32,31 +32,41 @@
   </style>
 </head>
 <body>
+
   {% for result in multi_results %}
     {% set label = ['A', 'B', 'C'][loop.index0] %}
 
-  <div class="description-box">
-    <h3 class="text-center description-title">📊 Business Line {{ label }}</h3>
+    <div class="description-box">
+      <h3 class="text-center description-title">📊 Business Line {{ label }}</h3>
 
+      <!-- Company description -->
+      <div class="mb-4">
+        <h5 class="description-title">🏢 Company Description</h5>
+        <pre>{{ result.company_description }}</pre>
+      </div>
 
-    <!-- Company description -->
-    <div class="mb-4">
-      <h5 class="description-title">🏢 Company Description</h5>
-      <pre>{{ result.company_description }}</pre>
+      <!-- Generated business plan -->
+      <div class="mb-4">
+        <h5 class="description-title">📄 Generated Business Plan</h5>
+        <pre id="markdown-content-{{ loop.index }}">{{ result.final_markdown }}</pre>
+      </div>
+
+      <div class="btn-group">
+        <a href="/application-form" class="btn btn-secondary">⬅ Back to Form</a>
+        <button class="btn btn-success" onclick="downloadMarkdown({{ loop.index }})">⬇ Download Plan {{ label }}</button>
+      </div>
     </div>
-
-    <!-- Generated business plan -->
-    <div class="mb-4">
-      <h5 class="description-title">📄 Generated Business Plan</h5>
-      <pre id="markdown-content-{{ loop.index }}">{{ result.final_markdown }}</pre>
-    </div>
-
-    <div class="btn-group">
-      <a href="/application-form" class="btn btn-secondary">⬅ Back to Form</a>
-      <button class="btn btn-success" onclick="downloadMarkdown({{ loop.index }})">⬇ Download as .md</button>
-    </div>
-  </div>
   {% endfor %}
+
+  {% if combined_plan %}
+    <div class="description-box">
+      <h3 class="text-center description-title">📘 Combined Business Plan</h3>
+      <pre id="combined-markdown">{{ combined_plan }}</pre>
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="downloadCombined()">⬇ Download Combined Plan</button>
+      </div>
+    </div>
+  {% endif %}
 
   <script>
     function downloadMarkdown(index) {
@@ -67,6 +77,19 @@
       const a = document.createElement("a");
       a.href = url;
       a.download = `business_plan_line_${index}.md`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function downloadCombined() {
+      const content = document.getElementById("combined-markdown").innerText;
+      const blob = new Blob([content], { type: "text/markdown" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "combined_business_plan.md";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

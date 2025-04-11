@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
-from app.graph.langgraph_business_model import run_business_plan_pipeline
+from app.graph.langgraph_business_model import run_business_plan_pipeline, fs_run_business_plan_pipeline
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -13,7 +13,7 @@ def get_application_form(request: Request):
 async def submit_form(request: Request):
     form_data = await request.form()
 
-    # Crea claramente 3 sets de datos distintos (A, B, C)
+    # Extrae datos del formulario para cada línea de negocio (A, B, C)
     lines = []
     for i in range(3):
         model_data = {
@@ -29,12 +29,16 @@ async def submit_form(request: Request):
         }
         lines.append(model_data)
 
-    # Procesa cada línea por separado con tu pipeline y guarda en estados separados claramente
-    business_plan_1 = run_business_plan_pipeline(lines[0])
-    business_plan_2 = run_business_plan_pipeline(lines[1])
-    business_plan_3 = run_business_plan_pipeline(lines[2])
+    # Procesa cada línea por separado con el grafo individual
+    state_1 = run_business_plan_pipeline(lines[0])
+    state_2 = run_business_plan_pipeline(lines[1])
+    state_3 = run_business_plan_pipeline(lines[2])
+
+    # Procesa el plan de negocio combinado usando los 3 resultados anteriores
+    combined_plan = fs_run_business_plan_pipeline([state_1, state_2, state_3])
 
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "multi_results": [business_plan_1, business_plan_2, business_plan_3]
+        "multi_results": [state_1, state_2, state_3],
+        "combined_plan": combined_plan["final_markdown"]
     })

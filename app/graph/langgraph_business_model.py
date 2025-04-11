@@ -3,7 +3,8 @@ from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
 import json
-llm = ChatOllama(model="llama3.2:latest")
+
+llm = ChatOllama(model="llama3:latest")
 
 
 class State(TypedDict):
@@ -25,6 +26,24 @@ class State(TypedDict):
     csr: str
     final_markdown: str
 
+class FatherState(TypedDict):
+    raw_data: list
+
+    executive_summary: str
+    project_team: str
+    product_description: str
+    market_analysis: str
+    marketing_plan: str
+    production_plan: str
+    organization_personnel: str
+    investment_plan: str
+    income_cashflow_forecast: str
+    financial_plan: str
+    legal_aspects: str
+    risk_assessment: str
+    contingency_coverage: str
+    csr: str
+    final_markdown: str
 
 
 
@@ -406,3 +425,240 @@ def run_business_plan_pipeline(data: dict) -> State:
     state = State({"raw_data":json.dumps(data)})
     final_state = graph.invoke(state)
     return final_state
+
+
+
+##################################
+
+def fs_start_node(state: FatherState) -> FatherState:
+    return state
+
+def fs_executive_summary_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into an executive_summary section
+Lines:
+{data[0]["executive_summary"]}
+{data[1]["executive_summary"]}
+{data[2]["executive_summary"]}
+"""
+    return {"executive_summary": ask_llm(prompt)}
+
+def fs_project_team_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a project_team section
+Lines:
+{data[0]["project_team"]}
+{data[1]["project_team"]}
+{data[2]["project_team"]}
+"""
+    return {"project_team": ask_llm(prompt)}
+
+def fs_product_description_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a product_description section
+Lines:
+{data[0]["product_description"]}
+{data[1]["product_description"]}
+{data[2]["product_description"]}
+"""
+    return {"product_description": ask_llm(prompt)}
+
+def fs_market_analysis_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a market_analysis section
+Lines:
+{data[0]["market_analysis"]}
+{data[1]["market_analysis"]}
+{data[2]["market_analysis"]}
+"""
+    return {"market_analysis": ask_llm(prompt)}
+
+def fs_marketing_plan_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a marketing_plan section
+Lines:
+{data[0]["marketing_plan"]}
+{data[1]["marketing_plan"]}
+{data[2]["marketing_plan"]}
+"""
+    return {"marketing_plan": ask_llm(prompt)}
+
+def fs_production_plan_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a production_plan section
+Lines:
+{data[0]["production_plan"]}
+{data[1]["production_plan"]}
+{data[2]["production_plan"]}
+"""
+    return {"production_plan": ask_llm(prompt)}
+
+def fs_organization_personnel_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into an organization_personnel section
+Lines:
+{data[0]["organization_personnel"]}
+{data[1]["organization_personnel"]}
+{data[2]["organization_personnel"]}
+"""
+    return {"organization_personnel": ask_llm(prompt)}
+
+def fs_investment_plan_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into an investment_plan section
+Lines:
+{data[0]["investment_plan"]}
+{data[1]["investment_plan"]}
+{data[2]["investment_plan"]}
+"""
+    return {"investment_plan": ask_llm(prompt)}
+
+def fs_income_cashflow_forecast_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into an income_cashflow_forecast section
+Lines:
+{data[0]["income_cashflow_forecast"]}
+{data[1]["income_cashflow_forecast"]}
+{data[2]["income_cashflow_forecast"]}
+"""
+    return {"income_cashflow_forecast": ask_llm(prompt)}
+
+def fs_financial_plan_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a financial_plan section
+Lines:
+{data[0]["financial_plan"]}
+{data[1]["financial_plan"]}
+{data[2]["financial_plan"]}
+"""
+    return {"financial_plan": ask_llm(prompt)}
+
+def fs_legal_aspects_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a legal_aspects section
+Lines:
+{data[0]["legal_aspects"]}
+{data[1]["legal_aspects"]}
+{data[2]["legal_aspects"]}
+"""
+    return {"legal_aspects": ask_llm(prompt)}
+
+def fs_risk_assessment_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a risk_assessment section
+Lines:
+{data[0]["risk_assessment"]}
+{data[1]["risk_assessment"]}
+{data[2]["risk_assessment"]}
+"""
+    return {"risk_assessment": ask_llm(prompt)}
+
+def fs_contingency_coverage_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a contingency_coverage section
+Lines:
+{data[0]["contingency_coverage"]}
+{data[1]["contingency_coverage"]}
+{data[2]["contingency_coverage"]}
+"""
+    return {"contingency_coverage": ask_llm(prompt)}
+
+def fs_csr_node(state: FatherState) -> FatherState:
+    data = state["raw_data"]
+    prompt = f"""
+Mix this three lines into a csr section
+Lines:
+{data[0]["csr"]}
+{data[1]["csr"]}
+{data[2]["csr"]}
+"""
+    return {"csr": ask_llm(prompt)}
+
+
+def fs_merge_to_markdown_node(state: FatherState) -> FatherState:
+    sections = [
+        "executive_summary",
+        "project_team",
+        "product_description",
+        "market_analysis",
+        "marketing_plan",
+        "production_plan",
+        "organization_personnel",
+        "investment_plan",
+        "income_cashflow_forecast",
+        "financial_plan",
+        "legal_aspects",
+        "risk_assessment",
+        "contingency_coverage",
+        "csr"
+    ]
+
+    toc = "## Table of Contents\n"
+    body = ""
+
+    for idx, section in enumerate(sections, 1):
+        title = section.replace("_", " ").title()
+        content = state.get(section, "*No content available.*")
+        toc += f"{idx}. {title}\n"
+        body += f"\n## {idx}. {title}\n{content}\n\n---\n"
+
+    markdown = f"# Business Plan\n\n{toc}\n\n{body}"
+    return {"final_markdown": markdown}
+
+
+graph_builder = StateGraph(FatherState)
+
+graph_builder.add_node("start", fs_start_node)
+
+# business sections
+section_nodes = {
+    "node_executive_summary": fs_executive_summary_node,
+    "node_project_team": fs_project_team_node,
+    "node_product_description": fs_product_description_node,
+    "node_market_analysis": fs_market_analysis_node,
+    "node_marketing_plan": fs_marketing_plan_node,
+    "node_production_plan": fs_production_plan_node,
+    "node_organization_personnel": fs_organization_personnel_node,
+    "node_investment_plan": fs_investment_plan_node,
+    "node_income_cashflow_forecast": fs_income_cashflow_forecast_node,
+    "node_financial_plan": fs_financial_plan_node,
+    "node_legal_aspects": fs_legal_aspects_node,
+    "node_risk_assessment": fs_risk_assessment_node,
+    "node_contingency_coverage": fs_contingency_coverage_node,
+    "node_csr": fs_csr_node,
+}
+
+for name, func in section_nodes.items():
+    graph_builder.add_node(name, func)
+
+graph_builder.add_node("merge_to_markdown", fs_merge_to_markdown_node)
+
+graph_builder.set_entry_point("start")
+
+for name in section_nodes:
+    graph_builder.add_edge("start", name)
+    graph_builder.add_edge(name, "merge_to_markdown")
+
+graph_builder.set_finish_point("merge_to_markdown")
+
+fs_graph = graph_builder.compile()
+
+
+def fs_run_business_plan_pipeline(states: list[State]) -> FatherState:
+    father_state = FatherState({"raw_data": states})
+    final_state = fs_graph.invoke(father_state)
+    return final_state
+
