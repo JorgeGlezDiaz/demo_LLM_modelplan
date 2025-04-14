@@ -24,7 +24,7 @@ class State(TypedDict):
     risk_assessment: str
     contingency_coverage: str
     csr: str
-    final_markdown: str
+
 
 class FatherState(TypedDict):
     raw_data: list
@@ -344,37 +344,6 @@ Company Description:
     return {"csr": ask_llm(prompt)}
 
 
-def merge_to_markdown_node(state: State) -> State:
-    sections = [
-        "executive_summary",
-        "project_team",
-        "product_description",
-        "market_analysis",
-        "marketing_plan",
-        "production_plan",
-        "organization_personnel",
-        "investment_plan",
-        "income_cashflow_forecast",
-        "financial_plan",
-        "legal_aspects",
-        "risk_assessment",
-        "contingency_coverage",
-        "csr"
-    ]
-
-    toc = "## Table of Contents\n"
-    body = ""
-
-    for idx, section in enumerate(sections, 1):
-        title = section.replace("_", " ").title()
-        content = state.get(section, "*No content available.*")
-        toc += f"{idx}. {title}\n"
-        body += f"\n## {idx}. {title}\n{content}\n\n---\n"
-
-    markdown = f"# Business Plan\n\n{toc}\n\n{body}"
-    return {"final_markdown": markdown}
-
-
 
 ### BUILD GRAPH ###
 
@@ -404,7 +373,7 @@ section_nodes = {
 for name, func in section_nodes.items():
     graph_builder.add_node(name, func)
 
-graph_builder.add_node("merge_to_markdown", merge_to_markdown_node)
+
 
 
 # graph logic
@@ -413,10 +382,10 @@ graph_builder.add_edge("convert_form", "company_describer")
 
 for name in section_nodes:
     graph_builder.add_edge("company_describer", name)
-    graph_builder.add_edge(name, "merge_to_markdown")
 
 
-graph_builder.set_finish_point("merge_to_markdown")
+
+
 
 graph = graph_builder.compile()
 
