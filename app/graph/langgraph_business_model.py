@@ -476,6 +476,8 @@ def fs_executive_summary_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into an executive_summary section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["executive_summary"]}
 {data[1]["executive_summary"]}
@@ -487,6 +489,8 @@ def fs_project_team_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a project_team section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["project_team"]}
 {data[1]["project_team"]}
@@ -498,6 +502,8 @@ def fs_product_description_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a product_description section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["product_description"]}
 {data[1]["product_description"]}
@@ -509,6 +515,8 @@ def fs_market_analysis_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a market_analysis section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["market_analysis"]}
 {data[1]["market_analysis"]}
@@ -520,6 +528,8 @@ def fs_marketing_plan_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a marketing_plan section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["marketing_plan"]}
 {data[1]["marketing_plan"]}
@@ -531,6 +541,8 @@ def fs_production_plan_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a production_plan section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["production_plan"]}
 {data[1]["production_plan"]}
@@ -542,6 +554,8 @@ def fs_organization_personnel_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into an organization_personnel section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["organization_personnel"]}
 {data[1]["organization_personnel"]}
@@ -553,6 +567,8 @@ def fs_investment_plan_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into an investment_plan section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["investment_plan"]}
 {data[1]["investment_plan"]}
@@ -564,6 +580,8 @@ def fs_income_cashflow_forecast_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into an income_cashflow_forecast section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["income_cashflow_forecast"]}
 {data[1]["income_cashflow_forecast"]}
@@ -575,6 +593,8 @@ def fs_financial_plan_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a financial_plan section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["financial_plan"]}
 {data[1]["financial_plan"]}
@@ -586,6 +606,8 @@ def fs_legal_aspects_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a legal_aspects section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["legal_aspects"]}
 {data[1]["legal_aspects"]}
@@ -597,6 +619,8 @@ def fs_risk_assessment_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a risk_assessment section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["risk_assessment"]}
 {data[1]["risk_assessment"]}
@@ -608,6 +632,8 @@ def fs_contingency_coverage_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a contingency_coverage section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["contingency_coverage"]}
 {data[1]["contingency_coverage"]}
@@ -619,6 +645,8 @@ def fs_csr_node(state: FatherState) -> FatherState:
     data = state["raw_data"]
     prompt = f"""
 Mix this three lines into a csr section
+Only return the final result. No introductions or preambles.
+
 Lines:
 {data[0]["csr"]}
 {data[1]["csr"]}
