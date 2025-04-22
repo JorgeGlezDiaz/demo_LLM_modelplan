@@ -13,9 +13,12 @@ def get_application_form(request: Request):
 async def submit_form(request: Request):
     form_data = await request.form()
 
-    # Extrae datos del formulario para cada línea de negocio (A, B, C)
+    # Leer número de líneas desde el formulario
+    num_lines = int(form_data.get("num_lines", 3))  # Por defecto 3 si no se recibe
+
+    # Recoger datos de cada línea de negocio
     lines = []
-    for i in range(3):
+    for i in range(num_lines):
         model_data = {
             "customer_segments": form_data.get(f"customer_segments_{i}", ""),
             "value_propositions": form_data.get(f"value_propositions_{i}", ""),
@@ -29,16 +32,14 @@ async def submit_form(request: Request):
         }
         lines.append(model_data)
 
-    # Procesa cada línea por separado con el grafo individual
-    state_1 = run_business_plan_pipeline(lines[0])
-    state_2 = run_business_plan_pipeline(lines[1])
-    state_3 = run_business_plan_pipeline(lines[2])
+    # Ejecutar los grafos por cada línea de negocio (de forma dinámica)
+    states = [run_business_plan_pipeline(line) for line in lines]
 
-    # Procesa el plan de negocio combinado usando los 3 resultados anteriores
-    combined_plan = fs_run_business_plan_pipeline([state_1, state_2, state_3])
+    # Combinar los resultados en un plan unificado
+    combined_plan = fs_run_business_plan_pipeline(states)
 
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "multi_results": [state_1, state_2, state_3],
+        "multi_results": states,
         "combined_plan": combined_plan["final_markdown"]
     })

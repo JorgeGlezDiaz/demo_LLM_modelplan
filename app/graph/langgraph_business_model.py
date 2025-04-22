@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
 import json
 
-llm = ChatOllama(model="llama3:latest")
+llm = ChatOllama(model="llama3.2:latest")
 
 
 class State(TypedDict):
@@ -402,157 +402,150 @@ def run_business_plan_pipeline(data: dict) -> State:
 def fs_start_node(state: FatherState) -> FatherState:
     return state
 
+def join_field_from_states(state: FatherState, field: str) -> str:
+    return "\n\n".join(d[field] for d in state["raw_data"])
+
+
 def fs_executive_summary_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into an executive_summary section
-Lines:
-{data[0]["executive_summary"]}
-{data[1]["executive_summary"]}
-{data[2]["executive_summary"]}
+You are a business analyst.
+
+You are given multiple executive summaries (each corresponding to a line of business from the same company). 
+
+Write a **combined executive summary** that unifies the key ideas, strategy and messaging into one single powerful summary in Markdown.
+
+Summaries:
+{join_field_from_states(state, "executive_summary")}
 """
     return {"executive_summary": ask_llm(prompt)}
 
+
 def fs_project_team_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a project_team section
-Lines:
-{data[0]["project_team"]}
-{data[1]["project_team"]}
-{data[2]["project_team"]}
+You are an HR strategist. Combine the project team descriptions below into one clear and coherent **Project Promotion Team** section in Markdown.
+
+Descriptions:
+{join_field_from_states(state, "project_team")}
 """
     return {"project_team": ask_llm(prompt)}
 
+
 def fs_product_description_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a product_description section
-Lines:
-{data[0]["product_description"]}
-{data[1]["product_description"]}
-{data[2]["product_description"]}
+You are a product strategist. Merge the product/service descriptions below into a single, unified **Product or Service Description** in Markdown.
+
+Descriptions:
+{join_field_from_states(state, "product_description")}
 """
     return {"product_description": ask_llm(prompt)}
 
+
 def fs_market_analysis_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a market_analysis section
-Lines:
-{data[0]["market_analysis"]}
-{data[1]["market_analysis"]}
-{data[2]["market_analysis"]}
+You are a market analyst. Combine the market analyses below into a single, insightful **Market Analysis** in Markdown format.
+
+Analyses:
+{join_field_from_states(state, "market_analysis")}
 """
     return {"market_analysis": ask_llm(prompt)}
 
+
 def fs_marketing_plan_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a marketing_plan section
-Lines:
-{data[0]["marketing_plan"]}
-{data[1]["marketing_plan"]}
-{data[2]["marketing_plan"]}
+You are a marketing consultant. Merge the following marketing plans into one strategic and actionable **Marketing Plan** in Markdown.
+
+Plans:
+{join_field_from_states(state, "marketing_plan")}
 """
     return {"marketing_plan": ask_llm(prompt)}
 
+
 def fs_production_plan_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a production_plan section
-Lines:
-{data[0]["production_plan"]}
-{data[1]["production_plan"]}
-{data[2]["production_plan"]}
+You are a production expert. Consolidate the production plans below into one cohesive **Production Plan** in Markdown format.
+
+Plans:
+{join_field_from_states(state, "production_plan")}
 """
     return {"production_plan": ask_llm(prompt)}
 
+
 def fs_organization_personnel_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into an organization_personnel section
-Lines:
-{data[0]["organization_personnel"]}
-{data[1]["organization_personnel"]}
-{data[2]["organization_personnel"]}
+You are an organizational consultant. Merge the organizational and HR strategies into one consistent **Organization and Personnel** section in Markdown.
+
+Descriptions:
+{join_field_from_states(state, "organization_personnel")}
 """
     return {"organization_personnel": ask_llm(prompt)}
 
+
 def fs_investment_plan_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into an investment_plan section
-Lines:
-{data[0]["investment_plan"]}
-{data[1]["investment_plan"]}
-{data[2]["investment_plan"]}
+You are a startup investment advisor. Unify the investment strategies below into a clear and structured **Investment Plan** in Markdown.
+
+Plans:
+{join_field_from_states(state, "investment_plan")}
 """
     return {"investment_plan": ask_llm(prompt)}
 
+
 def fs_income_cashflow_forecast_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into an income_cashflow_forecast section
-Lines:
-{data[0]["income_cashflow_forecast"]}
-{data[1]["income_cashflow_forecast"]}
-{data[2]["income_cashflow_forecast"]}
+You are a financial analyst. Combine the income and cash flow forecasts into a single, realistic **Forecast of Income Statement and Cash Flow** in Markdown.
+
+Forecasts:
+{join_field_from_states(state, "income_cashflow_forecast")}
 """
     return {"income_cashflow_forecast": ask_llm(prompt)}
 
+
 def fs_financial_plan_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a financial_plan section
-Lines:
-{data[0]["financial_plan"]}
-{data[1]["financial_plan"]}
-{data[2]["financial_plan"]}
+You are a financial planner. Merge the financial strategies below into a unified, coherent **Financial Plan** in Markdown.
+
+Plans:
+{join_field_from_states(state, "financial_plan")}
 """
     return {"financial_plan": ask_llm(prompt)}
 
+
 def fs_legal_aspects_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a legal_aspects section
-Lines:
-{data[0]["legal_aspects"]}
-{data[1]["legal_aspects"]}
-{data[2]["legal_aspects"]}
+You are a legal advisor. Combine the legal frameworks and requirements below into one consistent **Legal Aspects** section in Markdown.
+
+Notes:
+{join_field_from_states(state, "legal_aspects")}
 """
     return {"legal_aspects": ask_llm(prompt)}
 
+
 def fs_risk_assessment_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a risk_assessment section
-Lines:
-{data[0]["risk_assessment"]}
-{data[1]["risk_assessment"]}
-{data[2]["risk_assessment"]}
+You are a risk manager. Merge the risk assessments from each business line into one integrated **Risk Assessment** section in Markdown.
+
+Assessments:
+{join_field_from_states(state, "risk_assessment")}
 """
     return {"risk_assessment": ask_llm(prompt)}
 
+
 def fs_contingency_coverage_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a contingency_coverage section
-Lines:
-{data[0]["contingency_coverage"]}
-{data[1]["contingency_coverage"]}
-{data[2]["contingency_coverage"]}
+You are an operations strategist. Consolidate the contingency plans into a comprehensive **Contingency Coverage** section in Markdown.
+
+Plans:
+{join_field_from_states(state, "contingency_coverage")}
 """
     return {"contingency_coverage": ask_llm(prompt)}
 
+
 def fs_csr_node(state: FatherState) -> FatherState:
-    data = state["raw_data"]
     prompt = f"""
-Mix this three lines into a csr section
-Lines:
-{data[0]["csr"]}
-{data[1]["csr"]}
-{data[2]["csr"]}
+You are a CSR expert. Merge the CSR strategies and commitments from each business line into a unified **Corporate Social Responsibility (CSR)** section in Markdown.
+
+Details:
+{join_field_from_states(state, "csr")}
 """
     return {"csr": ask_llm(prompt)}
 

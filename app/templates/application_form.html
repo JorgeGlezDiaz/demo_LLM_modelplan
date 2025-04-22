@@ -63,6 +63,15 @@
 
     <form method="POST" action="/submit-form" id="business-form">
 
+      <div class="form-group mb-4">
+        <label for="num_lines" class="form-label fw-bold">How many business lines do you want to define?</label>
+        <select id="num_lines" name="num_lines" class="form-select" onchange="updateVisibleLines()" required>
+          <option value="1">1 Line</option>
+          <option value="2">2 Lines</option>
+          <option value="3" selected>3 Lines</option>
+        </select>
+      </div>
+
       {% set fields = [
         ('👥', 'Customer Segments', 'customer_segments', 'Who are your primary customer segments, and what are their most important needs, behaviors, and characteristics?'),
         ('🎯', 'Value Propositions', 'value_propositions', 'What specific problem are you solving, and what clear value do you deliver to your customers through your solution?'),
@@ -81,7 +90,9 @@
         <label class="form-label">{{ question }}</label>
 
         {% for i in range(3) %}
-        <textarea class="form-control" name="{{name}}_{{i}}" required placeholder="{{ title }} (Line {{ ['A', 'B', 'C'][i] }})"></textarea>
+        <div class="line-wrapper line-{{i}}">
+          <textarea class="form-control" name="{{name}}_{{i}}" placeholder="{{ title }} (Line {{ ['A', 'B', 'C'][i] }})"></textarea>
+        </div>
         {% endfor %}
       </div>
       {% endfor %}
@@ -138,6 +149,21 @@
       if (el) el.value = value;
     }
   }
+
+  function updateVisibleLines() {
+    const selectedLines = parseInt(document.getElementById("num_lines").value);
+    for (let i = 0; i < 3; i++) {
+      const wrappers = document.querySelectorAll(`.line-wrapper.line-${i}`);
+      wrappers.forEach(el => {
+        el.style.display = i < selectedLines ? "block" : "none";
+        const textarea = el.querySelector("textarea");
+        if (textarea) textarea.required = i < selectedLines;
+        if (i >= selectedLines && textarea) textarea.value = "";
+      });
+    }
+  }
+
+  window.onload = updateVisibleLines;
 </script>
 
 </body>
