@@ -4,8 +4,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
-import json
 from dotenv import load_dotenv
+import json
 import os
 
 load_dotenv()
@@ -25,9 +25,6 @@ llms = {
 
 current_llm = llm_ollama
 
-
-
-
 class State(TypedDict):
     raw_data: str
     company_description: str
@@ -45,7 +42,6 @@ class State(TypedDict):
     risk_assessment: str
     contingency_coverage: str
     csr: str
-
 
 class FatherState(TypedDict):
     raw_data: list
@@ -67,21 +63,18 @@ class FatherState(TypedDict):
     final_markdown: str
 
 
-
 def ask_llm(prompt: str) -> str:
     response = current_llm.invoke([HumanMessage(content=prompt)])
     return response.content.strip()
-
 
 def convert_input_into_markdown(data: dict) -> str:
     sections = [f"### {k.replace('_', ' ').capitalize()}\n{v.strip()}" for k, v in data.items()]
     return "\n\n".join(sections)
 
-
 ### NODES ###
 
 def convert_form_node(state: dict) -> State:
-    raw_data_dict = json.loads(state["raw_data"])  # Ahora sí es un dict correctamente
+    raw_data_dict = json.loads(state["raw_data"]) 
     result = convert_input_into_markdown(raw_data_dict)
     state["raw_data"] = result
     return state
@@ -90,7 +83,8 @@ def company_description_node(state: State) -> State:
     prompt = f"""
 You are a business consultant with expertise in startup analysis and pitch preparation.
 
-Carefully read the company's foundational information below and generate a well-structured, detailed, and persuasive **company description** in **Markdown format**. Write between **400-600 words**.
+Carefully read the company's foundational information below and generate a well-structured, 
+detailed, and persuasive **company description** in **Markdown format**. Write between **400-600 words**.
 
 ### Guidelines:
 - Use a professional, yet engaging tone (like addressing investors).
@@ -114,7 +108,7 @@ Write the full company description below:
     return {"company_description": ask_llm(prompt)}
 
 
-### BUSINESS PLAN SECTION NODES ###
+### STATES SECTION NODES ###
 
 def executive_summary_node(state: State) -> State:
     prompt = f"""
@@ -365,15 +359,13 @@ Company Description:
     return {"csr": ask_llm(prompt)}
 
 
-
-### BUILD GRAPH ###
+### STATES GRAPH ###
 
 graph_builder = StateGraph(State)
 
 graph_builder.add_node("convert_form", convert_form_node)
 graph_builder.add_node("company_describer", company_description_node)
 
-# business sections
 section_nodes = {
     "node_executive_summary": executive_summary_node,
     "node_project_team": project_team_node,
@@ -394,19 +386,11 @@ section_nodes = {
 for name, func in section_nodes.items():
     graph_builder.add_node(name, func)
 
-
-
-
-# graph logic
 graph_builder.set_entry_point("convert_form")
 graph_builder.add_edge("convert_form", "company_describer")
 
 for name in section_nodes:
     graph_builder.add_edge("company_describer", name)
-
-
-
-
 
 graph = graph_builder.compile()
 
@@ -422,16 +406,13 @@ def run_business_plan_pipeline(data: dict, model_name: str = "ollama") -> State:
     })
     return graph.invoke(state)
 
-
-
-##################################
+### BUSINESS PLAN SECTION NODES ###
 
 def fs_start_node(state: FatherState) -> FatherState:
     return state
 
 def join_field_from_states(state: FatherState, field: str) -> str:
     return "\n\n".join(d[field] for d in state["raw_data"])
-
 
 def fs_executive_summary_node(state: FatherState) -> FatherState:
     prompt = f"""
@@ -612,7 +593,6 @@ graph_builder = StateGraph(FatherState)
 
 graph_builder.add_node("start", fs_start_node)
 
-# business sections
 section_nodes = {
     "node_executive_summary": fs_executive_summary_node,
     "node_project_team": fs_project_team_node,

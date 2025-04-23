@@ -1,7 +1,8 @@
+import time
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from app.graph.langgraph_business_model import run_business_plan_pipeline, fs_run_business_plan_pipeline
-import time
+
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -15,9 +16,8 @@ async def submit_form(request: Request):
     form_data = await request.form()
     start_time = time.time()
 
-
     num_lines = int(form_data.get("num_lines", 3))  # 3 if not put
-    model_name = form_data.get("model", "ollama")
+    model_name = form_data.get("model", "ollama")   # ollama if not put
 
     lines = []
     for i in range(num_lines):
@@ -37,7 +37,7 @@ async def submit_form(request: Request):
     states = [run_business_plan_pipeline(line, model_name) for line in lines]
     combined_plan = fs_run_business_plan_pipeline(states, model_name)
 
-    end_time = time.time()  # 🕒 Marca de fin
+    end_time = time.time()  
     duration = end_time - start_time
     minutes = int(duration // 60)
     seconds = int(duration % 60)
