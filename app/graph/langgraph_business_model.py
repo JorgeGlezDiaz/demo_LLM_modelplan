@@ -15,7 +15,7 @@ os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 
 llm_ollama = ChatOllama(model="llama3.2:latest")
 llm_chatgpt = ChatOpenAI(model="gpt-4-1106-preview", temperature=0.7)
-llm_gemini = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7)
+llm_gemini = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.7)
 
 llms = {
     "ollama": llm_ollama,
