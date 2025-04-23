@@ -16,6 +16,9 @@ async def submit_form(request: Request):
     # Leer número de líneas desde el formulario
     num_lines = int(form_data.get("num_lines", 3))  # Por defecto 3 si no se recibe
 
+    # Leer el modelo seleccionado desde el formulario
+    model_name = form_data.get("model", "ollama")
+
     # Recoger datos de cada línea de negocio
     lines = []
     for i in range(num_lines):
@@ -33,10 +36,10 @@ async def submit_form(request: Request):
         lines.append(model_data)
 
     # Ejecutar los grafos por cada línea de negocio (de forma dinámica)
-    states = [run_business_plan_pipeline(line) for line in lines]
+    states = [run_business_plan_pipeline(line, model_name) for line in lines]
 
     # Combinar los resultados en un plan unificado
-    combined_plan = fs_run_business_plan_pipeline(states)
+    combined_plan = fs_run_business_plan_pipeline(states, model_name)
 
     return templates.TemplateResponse("business_plan.html", {
         "request": request,

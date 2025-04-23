@@ -1,10 +1,31 @@
 from langchain_ollama import ChatOllama
+from langchain_community.chat_models import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
 import json
+from dotenv import load_dotenv
+import os
 
-llm = ChatOllama(model="llama3.2:latest")
+load_dotenv()
+
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+
+llm_ollama = ChatOllama(model="llama3.2:latest")
+llm_chatgpt = ChatOpenAI(model="gpt-4-0125-preview", temperature=0.7)
+llm_gemini = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7)
+
+llms = {
+    "ollama": llm_ollama,
+    "chatgpt": llm_chatgpt,
+    "gemini": llm_gemini
+}
+
+current_llm = llm_ollama
+
+
 
 
 class State(TypedDict):
@@ -48,7 +69,7 @@ class FatherState(TypedDict):
 
 
 def ask_llm(prompt: str) -> str:
-    response = llm.invoke([HumanMessage(content=prompt)])
+    response = current_llm.invoke([HumanMessage(content=prompt)])
     return response.content.strip()
 
 
@@ -389,11 +410,17 @@ for name in section_nodes:
 
 graph = graph_builder.compile()
 
+def run_business_plan_pipeline(data: dict, model_name: str = "ollama") -> State:
+    global current_llm
+    current_llm = llms.get(model_name, llm_ollama) 
 
-def run_business_plan_pipeline(data: dict) -> State:
-    state = State({"raw_data":json.dumps(data)})
-    final_state = graph.invoke(state)
-    return final_state
+    print(f"\n🔧 Using LLM model: {model_name.upper()}")
+
+    state = State({
+        "raw_data": json.dumps(data),
+        "model": model_name
+    })
+    return graph.invoke(state)
 
 
 
@@ -618,9 +645,15 @@ graph_builder.set_finish_point("merge_to_markdown")
 
 fs_graph = graph_builder.compile()
 
+def fs_run_business_plan_pipeline(states: list[State], model_name: str = "ollama") -> FatherState:
+    global current_llm
+    current_llm = llms.get(model_name, llm_ollama)
 
-def fs_run_business_plan_pipeline(states: list[State]) -> FatherState:
-    father_state = FatherState({"raw_data": states})
+    print(f"\n🔧 Using LLM model: {model_name.upper()}")
+
+    father_state = FatherState({
+        "raw_data": states
+    })
     final_state = fs_graph.invoke(father_state)
     return final_state
 
