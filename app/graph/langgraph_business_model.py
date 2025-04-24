@@ -67,7 +67,7 @@ class FatherState(TypedDict):
 def ask_llm(prompt: str) -> str:
     response = current_llm.invoke([HumanMessage(content=prompt)])
     if current_llm == llm_gemini:
-       time.sleep(61)
+       time.sleep(21)
     return response.content.strip()
 
 def convert_input_into_markdown(data: dict) -> str:
