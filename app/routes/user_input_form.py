@@ -22,6 +22,7 @@ async def submit_form(request: Request):
     lines = []
     for i in range(num_lines):
         model_data = {
+            "business_line_name": f"Business Line {i + 1}",
             "customer_segments": form_data.get(f"customer_segments_{i}", ""),
             "value_propositions": form_data.get(f"value_propositions_{i}", ""),
             "channels": form_data.get(f"channels_{i}", ""),
@@ -34,8 +35,7 @@ async def submit_form(request: Request):
         }
         lines.append(model_data)
 
-    states = [run_business_plan_pipeline(line, model_name) for line in lines]
-    combined_plan = fs_run_business_plan_pipeline(states, model_name)
+    combined_plan = fs_run_business_plan_pipeline(lines, model_name)
 
     end_time = time.time()  
     duration = end_time - start_time
@@ -46,6 +46,6 @@ async def submit_form(request: Request):
     
     return templates.TemplateResponse("business_plan.html", {
         "request": request,
-        "multi_results": states,
+        "multi_results": combined_plan["raw_data"],
         "combined_plan": combined_plan["final_markdown"]
     })

@@ -4,7 +4,9 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
 from langchain_core.messages import HumanMessage
+from typing_extensions import Annotated
 from dotenv import load_dotenv
+import operator
 import time
 import json
 import os
@@ -15,7 +17,7 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 
 llm_ollama = ChatOllama(model="llama3.2:latest")
-llm_chatgpt = ChatOpenAI(model="gpt-4-1106-preview", temperature=0.7)
+llm_chatgpt = ChatOpenAI(model="gpt-4o-mini", temperature=0.7)
 llm_gemini = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.7)
 
 llms = {
@@ -25,6 +27,9 @@ llms = {
 }
 
 current_llm = llm_ollama
+lines_data = []
+current_model_name = "ollama"
+
 
 class State(TypedDict):
     raw_data: str
@@ -45,7 +50,8 @@ class State(TypedDict):
     csr: str
 
 class FatherState(TypedDict):
-    raw_data: list
+
+    raw_data: Annotated[list, operator.add]
 
     executive_summary: str
     project_team: str
@@ -604,6 +610,25 @@ def fs_merge_to_markdown_node(state: FatherState) -> FatherState:
     return {"final_markdown": markdown}
 
 
+def line_a_business_plan_node(state: FatherState) -> FatherState:
+    result = run_business_plan_pipeline(lines_data[0], current_model_name)
+    state["raw_data"].append(result)
+    return state
+
+def line_b_business_plan_node(state: FatherState) -> FatherState:
+    result = run_business_plan_pipeline(lines_data[1], current_model_name)
+    state["raw_data"].append(result)
+    return state
+
+def line_c_business_plan_node(state: FatherState) -> FatherState:
+    result = run_business_plan_pipeline(lines_data[2], current_model_name)
+    state["raw_data"].append(result)
+    return state
+
+
+
+
+
 graph_builder = StateGraph(FatherState)
 
 # --- NODOS ---
@@ -668,15 +693,118 @@ graph_builder.set_finish_point("merge_to_markdown")
 fs_graph = graph_builder.compile()
 
 
-def fs_run_business_plan_pipeline(states: list[State], model_name: str = "ollama") -> FatherState:
-    global current_llm
-    current_llm = llms.get(model_name, llm_ollama)
+
+def fs_run_business_plan_pipeline(lines: list[dict], model_name: str = "ollama") -> FatherState:
+    global lines_data
+    global current_model_name
+
+    lines_data = lines
+    current_model_name = model_name
 
     print(f"\n🔧 Using LLM model: {model_name.upper()}")
 
-    father_state = FatherState({
-        "raw_data": states
-    })
-    final_state = fs_graph.invoke(father_state)
-    return final_state
+    fs_graph_builder = StateGraph(FatherState)
 
+    fs_graph_builder.add_node("start", fs_start_node)
+
+    # --- AÑADIR NODOS DE LAS LÍNEAS Y CONECTAR EN PARALELO ---
+    if len(lines) > 0:
+        fs_graph_builder.add_node("line_a", line_a_business_plan_node)
+        fs_graph_builder.add_edge("start", "line_a")
+    if len(lines) > 1:
+        fs_graph_builder.add_node("line_b", line_b_business_plan_node)
+        fs_graph_builder.add_edge("start", "line_b")
+    if len(lines) > 2:
+        fs_graph_builder.add_node("line_c", line_c_business_plan_node)
+        fs_graph_builder.add_edge("start", "line_c")
+
+    # --- AÑADIR NODOS DE COMBINACIÓN ---
+    fs_graph_builder.add_node("node_executive_summary", fs_executive_summary_node)
+    fs_graph_builder.add_node("node_project_team", fs_project_team_node)
+    fs_graph_builder.add_node("node_product_description", fs_product_description_node)
+    fs_graph_builder.add_node("node_market_analysis", fs_market_analysis_node)
+    fs_graph_builder.add_node("node_marketing_plan", fs_marketing_plan_node)
+    fs_graph_builder.add_node("node_production_plan", fs_production_plan_node)
+    fs_graph_builder.add_node("node_organization_personnel", fs_organization_personnel_node)
+    fs_graph_builder.add_node("node_investment_plan", fs_investment_plan_node)
+    fs_graph_builder.add_node("node_income_cashflow_forecast", fs_income_cashflow_forecast_node)
+    fs_graph_builder.add_node("node_financial_plan", fs_financial_plan_node)
+    fs_graph_builder.add_node("node_legal_aspects", fs_legal_aspects_node)
+    fs_graph_builder.add_node("node_risk_assessment", fs_risk_assessment_node)
+    fs_graph_builder.add_node("node_contingency_coverage", fs_contingency_coverage_node)
+    fs_graph_builder.add_node("node_csr", fs_csr_node)
+    fs_graph_builder.add_node("merge_to_markdown", fs_merge_to_markdown_node)
+
+    # --- CONECTAR LAS LÍNEAS A LOS NODOS DE COMBINACIÓN ---
+    if len(lines) > 0:
+        fs_graph_builder.add_edge("line_a", "node_executive_summary")
+        fs_graph_builder.add_edge("line_a", "node_project_team")
+        fs_graph_builder.add_edge("line_a", "node_product_description")
+        fs_graph_builder.add_edge("line_a", "node_market_analysis")
+        fs_graph_builder.add_edge("line_a", "node_marketing_plan")
+        fs_graph_builder.add_edge("line_a", "node_production_plan")
+        fs_graph_builder.add_edge("line_a", "node_organization_personnel")
+        fs_graph_builder.add_edge("line_a", "node_investment_plan")
+        fs_graph_builder.add_edge("line_a", "node_income_cashflow_forecast")
+        fs_graph_builder.add_edge("line_a", "node_financial_plan")
+        fs_graph_builder.add_edge("line_a", "node_legal_aspects")
+        fs_graph_builder.add_edge("line_a", "node_risk_assessment")
+        fs_graph_builder.add_edge("line_a", "node_contingency_coverage")
+        fs_graph_builder.add_edge("line_a", "node_csr")
+    if len(lines) > 1:
+        fs_graph_builder.add_edge("line_b", "node_executive_summary")
+        fs_graph_builder.add_edge("line_b", "node_project_team")
+        fs_graph_builder.add_edge("line_b", "node_product_description")
+        fs_graph_builder.add_edge("line_b", "node_market_analysis")
+        fs_graph_builder.add_edge("line_b", "node_marketing_plan")
+        fs_graph_builder.add_edge("line_b", "node_production_plan")
+        fs_graph_builder.add_edge("line_b", "node_organization_personnel")
+        fs_graph_builder.add_edge("line_b", "node_investment_plan")
+        fs_graph_builder.add_edge("line_b", "node_income_cashflow_forecast")
+        fs_graph_builder.add_edge("line_b", "node_financial_plan")
+        fs_graph_builder.add_edge("line_b", "node_legal_aspects")
+        fs_graph_builder.add_edge("line_b", "node_risk_assessment")
+        fs_graph_builder.add_edge("line_b", "node_contingency_coverage")
+        fs_graph_builder.add_edge("line_b", "node_csr")
+    if len(lines) > 2:
+        fs_graph_builder.add_edge("line_c", "node_executive_summary")
+        fs_graph_builder.add_edge("line_c", "node_project_team")
+        fs_graph_builder.add_edge("line_c", "node_product_description")
+        fs_graph_builder.add_edge("line_c", "node_market_analysis")
+        fs_graph_builder.add_edge("line_c", "node_marketing_plan")
+        fs_graph_builder.add_edge("line_c", "node_production_plan")
+        fs_graph_builder.add_edge("line_c", "node_organization_personnel")
+        fs_graph_builder.add_edge("line_c", "node_investment_plan")
+        fs_graph_builder.add_edge("line_c", "node_income_cashflow_forecast")
+        fs_graph_builder.add_edge("line_c", "node_financial_plan")
+        fs_graph_builder.add_edge("line_c", "node_legal_aspects")
+        fs_graph_builder.add_edge("line_c", "node_risk_assessment")
+        fs_graph_builder.add_edge("line_c", "node_contingency_coverage")
+        fs_graph_builder.add_edge("line_c", "node_csr")
+
+    # --- CONECTAR LOS NODOS DE COMBINACIÓN AL FINAL ---
+    fs_graph_builder.add_edge("node_executive_summary", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_project_team", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_product_description", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_market_analysis", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_marketing_plan", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_production_plan", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_organization_personnel", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_investment_plan", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_income_cashflow_forecast", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_financial_plan", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_legal_aspects", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_risk_assessment", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_contingency_coverage", "merge_to_markdown")
+    fs_graph_builder.add_edge("node_csr", "merge_to_markdown")
+
+    # --- PUNTOS DE ENTRADA Y SALIDA ---
+    fs_graph_builder.set_entry_point("start")
+    fs_graph_builder.set_finish_point("merge_to_markdown")
+
+    dynamic_fs_graph = fs_graph_builder.compile()
+
+    father_state = FatherState({"raw_data": []})
+    final_state = dynamic_fs_graph.invoke(father_state)
+
+    return final_state
