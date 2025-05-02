@@ -366,34 +366,46 @@ Company Description:
 
 graph_builder = StateGraph(State)
 
+# --- NODOS ---
+
 graph_builder.add_node("convert_form", convert_form_node)
 graph_builder.add_node("company_describer", company_description_node)
 
-section_nodes = {
-    "node_executive_summary": executive_summary_node,
-    "node_project_team": project_team_node,
-    "node_product_description": product_description_node,
-    "node_market_analysis": market_analysis_node,
-    "node_marketing_plan": marketing_plan_node,
-    "node_production_plan": production_plan_node,
-    "node_organization_personnel": organization_personnel_node,
-    "node_investment_plan": investment_plan_node,
-    "node_income_cashflow_forecast": income_cashflow_forecast_node,
-    "node_financial_plan": financial_plan_node,
-    "node_legal_aspects": legal_aspects_node,
-    "node_risk_assessment": risk_assessment_node,
-    "node_contingency_coverage": contingency_coverage_node,
-    "node_csr": csr_node,
-}
-
-for name, func in section_nodes.items():
-    graph_builder.add_node(name, func)
+graph_builder.add_node("node_executive_summary", executive_summary_node)
+graph_builder.add_node("node_project_team", project_team_node)
+graph_builder.add_node("node_product_description", product_description_node)
+graph_builder.add_node("node_market_analysis", market_analysis_node)
+graph_builder.add_node("node_marketing_plan", marketing_plan_node)
+graph_builder.add_node("node_production_plan", production_plan_node)
+graph_builder.add_node("node_organization_personnel", organization_personnel_node)
+graph_builder.add_node("node_investment_plan", investment_plan_node)
+graph_builder.add_node("node_income_cashflow_forecast", income_cashflow_forecast_node)
+graph_builder.add_node("node_financial_plan", financial_plan_node)
+graph_builder.add_node("node_legal_aspects", legal_aspects_node)
+graph_builder.add_node("node_risk_assessment", risk_assessment_node)
+graph_builder.add_node("node_contingency_coverage", contingency_coverage_node)
+graph_builder.add_node("node_csr", csr_node)
 
 graph_builder.set_entry_point("convert_form")
+
+# --- EDGES ---
+
 graph_builder.add_edge("convert_form", "company_describer")
 
-for name in section_nodes:
-    graph_builder.add_edge("company_describer", name)
+graph_builder.add_edge("company_describer", "node_executive_summary")
+graph_builder.add_edge("company_describer", "node_project_team")
+graph_builder.add_edge("company_describer", "node_product_description")
+graph_builder.add_edge("company_describer", "node_market_analysis")
+graph_builder.add_edge("company_describer", "node_marketing_plan")
+graph_builder.add_edge("company_describer", "node_production_plan")
+graph_builder.add_edge("company_describer", "node_organization_personnel")
+graph_builder.add_edge("company_describer", "node_investment_plan")
+graph_builder.add_edge("company_describer", "node_income_cashflow_forecast")
+graph_builder.add_edge("company_describer", "node_financial_plan")
+graph_builder.add_edge("company_describer", "node_legal_aspects")
+graph_builder.add_edge("company_describer", "node_risk_assessment")
+graph_builder.add_edge("company_describer", "node_contingency_coverage")
+graph_builder.add_edge("company_describer", "node_csr")
 
 graph = graph_builder.compile()
 
@@ -594,39 +606,67 @@ def fs_merge_to_markdown_node(state: FatherState) -> FatherState:
 
 graph_builder = StateGraph(FatherState)
 
+# --- NODOS ---
+
 graph_builder.add_node("start", fs_start_node)
 
-section_nodes = {
-    "node_executive_summary": fs_executive_summary_node,
-    "node_project_team": fs_project_team_node,
-    "node_product_description": fs_product_description_node,
-    "node_market_analysis": fs_market_analysis_node,
-    "node_marketing_plan": fs_marketing_plan_node,
-    "node_production_plan": fs_production_plan_node,
-    "node_organization_personnel": fs_organization_personnel_node,
-    "node_investment_plan": fs_investment_plan_node,
-    "node_income_cashflow_forecast": fs_income_cashflow_forecast_node,
-    "node_financial_plan": fs_financial_plan_node,
-    "node_legal_aspects": fs_legal_aspects_node,
-    "node_risk_assessment": fs_risk_assessment_node,
-    "node_contingency_coverage": fs_contingency_coverage_node,
-    "node_csr": fs_csr_node,
-}
-
-for name, func in section_nodes.items():
-    graph_builder.add_node(name, func)
+graph_builder.add_node("node_executive_summary", fs_executive_summary_node)
+graph_builder.add_node("node_project_team", fs_project_team_node)
+graph_builder.add_node("node_product_description", fs_product_description_node)
+graph_builder.add_node("node_market_analysis", fs_market_analysis_node)
+graph_builder.add_node("node_marketing_plan", fs_marketing_plan_node)
+graph_builder.add_node("node_production_plan", fs_production_plan_node)
+graph_builder.add_node("node_organization_personnel", fs_organization_personnel_node)
+graph_builder.add_node("node_investment_plan", fs_investment_plan_node)
+graph_builder.add_node("node_income_cashflow_forecast", fs_income_cashflow_forecast_node)
+graph_builder.add_node("node_financial_plan", fs_financial_plan_node)
+graph_builder.add_node("node_legal_aspects", fs_legal_aspects_node)
+graph_builder.add_node("node_risk_assessment", fs_risk_assessment_node)
+graph_builder.add_node("node_contingency_coverage", fs_contingency_coverage_node)
+graph_builder.add_node("node_csr", fs_csr_node)
 
 graph_builder.add_node("merge_to_markdown", fs_merge_to_markdown_node)
 
+# --- ENTRY POINT ---
 graph_builder.set_entry_point("start")
 
-for name in section_nodes:
-    graph_builder.add_edge("start", name)
-    graph_builder.add_edge(name, "merge_to_markdown")
+# --- EDGES ---
 
+graph_builder.add_edge("start", "node_executive_summary")
+graph_builder.add_edge("start", "node_project_team")
+graph_builder.add_edge("start", "node_product_description")
+graph_builder.add_edge("start", "node_market_analysis")
+graph_builder.add_edge("start", "node_marketing_plan")
+graph_builder.add_edge("start", "node_production_plan")
+graph_builder.add_edge("start", "node_organization_personnel")
+graph_builder.add_edge("start", "node_investment_plan")
+graph_builder.add_edge("start", "node_income_cashflow_forecast")
+graph_builder.add_edge("start", "node_financial_plan")
+graph_builder.add_edge("start", "node_legal_aspects")
+graph_builder.add_edge("start", "node_risk_assessment")
+graph_builder.add_edge("start", "node_contingency_coverage")
+graph_builder.add_edge("start", "node_csr")
+
+graph_builder.add_edge("node_executive_summary", "merge_to_markdown")
+graph_builder.add_edge("node_project_team", "merge_to_markdown")
+graph_builder.add_edge("node_product_description", "merge_to_markdown")
+graph_builder.add_edge("node_market_analysis", "merge_to_markdown")
+graph_builder.add_edge("node_marketing_plan", "merge_to_markdown")
+graph_builder.add_edge("node_production_plan", "merge_to_markdown")
+graph_builder.add_edge("node_organization_personnel", "merge_to_markdown")
+graph_builder.add_edge("node_investment_plan", "merge_to_markdown")
+graph_builder.add_edge("node_income_cashflow_forecast", "merge_to_markdown")
+graph_builder.add_edge("node_financial_plan", "merge_to_markdown")
+graph_builder.add_edge("node_legal_aspects", "merge_to_markdown")
+graph_builder.add_edge("node_risk_assessment", "merge_to_markdown")
+graph_builder.add_edge("node_contingency_coverage", "merge_to_markdown")
+graph_builder.add_edge("node_csr", "merge_to_markdown")
+
+# --- FINISH POINT ---
 graph_builder.set_finish_point("merge_to_markdown")
 
 fs_graph = graph_builder.compile()
+
 
 def fs_run_business_plan_pipeline(states: list[State], model_name: str = "ollama") -> FatherState:
     global current_llm
