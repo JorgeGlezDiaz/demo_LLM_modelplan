@@ -179,40 +179,20 @@ def run_business_line_c(state: FatherState) -> FatherState:
     state["raw_data"].append(result)
     return state
 
-def conditional_lines():
-    funciones = [line_1, line_2, line_3]
-    num_lines = len(lines)
-    
-    if 1 <= num_lines <= 3:
-        funciones[num_lines - 1]() 
-    else:
-        raise ValueError("Business Plan must be between 1 and 3 lines.")
+from typing import Optional
 
+def condition_line_a(state: FatherState) -> Optional[str]:
+    return "run_business_line_a"  
 
+def condition_line_b(state: FatherState) -> Optional[str]:
+    if state.get("num_lines", 0) >= 2:
+        return "run_business_line_b"
+    return None
 
-def line_1():
-    fs_graph.add_edge("start", "run_business_line_a")
-    fs_graph.add_edge("run_business_line_a", "union")
-
-    return 
-
-def line_2():
-    fs_graph.add_edge("start", "run_business_line_a")
-    fs_graph.add_edge("start", "run_business_line_b")
-
-    fs_graph.add_edge("run_business_line_a", "union")
-    fs_graph.add_edge("run_business_line_b", "union")
-    return 
-
-def line_3():
-    fs_graph.add_edge("start", "run_business_line_a")
-    fs_graph.add_edge("start", "run_business_line_b")
-    fs_graph.add_edge("start", "run_business_line_c")
-
-    fs_graph.add_edge("run_business_line_a", "union")
-    fs_graph.add_edge("run_business_line_b", "union")
-    fs_graph.add_edge("run_business_line_c", "union")
-    return 
+def condition_line_c(state: FatherState) -> Optional[str]:
+    if state.get("num_lines", 0) >= 3:
+        return "run_business_line_c"
+    return None
 
 
 fs_graph = StateGraph(FatherState)
@@ -245,7 +225,15 @@ fs_graph.add_node("fs_merge_to_markdown", fs_merge_to_markdown_node)
 # Entry point
 fs_graph.set_entry_point("start")
 
-conditional_lines()
+fs_graph.add_conditional_edges("start", [
+    (condition_line_a, "run_business_line_a"),
+    (condition_line_b, "run_business_line_b"),
+    (condition_line_c, "run_business_line_c"),
+])
+
+fs_graph.add_edge("run_business_line_a", "union")
+fs_graph.add_edge("run_business_line_b", "union")
+fs_graph.add_edge("run_business_line_c", "union")
 
 fs_graph.add_edge("union", "fs_executive_summary")
 fs_graph.add_edge("union", "fs_project_team")
@@ -283,6 +271,7 @@ compiled_fs_graph = fs_graph.compile()
 
 
 initial_state: FatherState = {
+    "num_lines": len(lines),
     "raw_data": [],
     "executive_summary": "",
     "project_team": "",
