@@ -34,6 +34,7 @@ async def submit_form(request: Request):
             "cost_structure": form_data.get(f"cost_structure_{i}", "")
         }
         lines.append(model_data)
+        print(lines)
 
     combined_plan = fs_run_business_plan_pipeline(lines, model_name)
 
